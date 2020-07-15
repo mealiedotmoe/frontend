@@ -1,0 +1,13 @@
+.picker-container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .color-picker-container {
+    background: rgba(0,0,0,.24);
+  }
+  .content {
+    padding: 32px;
+  }
+}

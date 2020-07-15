@@ -3,6 +3,7 @@ import Head from "next/head";
 import { FaRuler as RulerIcon } from "react-icons/fa";
 import { GiPalette as PaletteIcon, GiTreasureMap as MapIcon, GiRibbonMedal as MedalIcon } from "react-icons/gi";
 import { AiOutlineQuestion as QuestionIcon } from "react-icons/ai";
+import { MdOpenInNew as ExternalLinkIcon } from "react-icons/md";
 
 class LandingPage extends React.Component<{}> {
   public render() {
@@ -39,7 +40,7 @@ class LandingPage extends React.Component<{}> {
               <MapIcon className="icon map" /> Server Map
             </a>
             <a href="https://danbo.space" target="__blank" className="nav-link">
-              <MedalIcon className="icon medal" /> Leaderboards
+              <MedalIcon className="icon medal" /> Leaderboards <ExternalLinkIcon className="external-link-icon" />
             </a>
             <a href="/faq" className="nav-link">
               <QuestionIcon className="icon faq" /> Frequently Asked Questions

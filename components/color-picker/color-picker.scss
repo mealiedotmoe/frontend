@@ -1,0 +1,62 @@
+@import "../../styles/vars.scss";
+
+.color-picker {
+  height: calc(100%);
+  width: calc(100%);
+
+  .picker-body {
+    height: 70%;
+    margin-bottom: 5%;
+    position: relative;
+    cursor: grab;
+
+    .saturation-handle {
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      border: 3px solid #ffffff;
+      position: absolute;
+      top: 0;
+      right: 0;
+      box-shadow: 0 4px 1px;
+      cursor: grab;
+    }
+  }
+  .slider-component {
+    display: grid;
+    grid-template-columns: 120px auto;
+    margin: 1rem 46px;
+    align-items: center;
+
+    .slider-label {
+      font-size: 14px;
+      color: #ffffff;
+      display: block;
+      margin-right: 1.5rem;
+      line-height: 1;
+    }
+    .slider-container {
+      .slider {
+        height: 6px;
+        border-radius: 6px;
+        position: relative;
+        cursor: grab;
+
+        &.main-color {
+          background: $main-color-gradient;
+        }
+
+        .slider-handle {
+          position: absolute;
+          top: -4.1px;
+          width: 9px;
+          height: 9px;
+          border: solid #fff 3px;
+          border-radius: 50%;
+          cursor: grab;
+          outline: none;
+        }
+      }
+    }
+  }
+}
