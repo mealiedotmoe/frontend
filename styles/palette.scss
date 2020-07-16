@@ -1,11 +1,23 @@
+@import "./root.scss";
+
 .picker-container {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5fr 8fr;
 
   .color-picker-container {
     background: rgba(0,0,0,.24);
+    position: relative;
+
+    .context-change-text-button {
+      @extend .text-button;
+      position: absolute;
+      bottom: 10px;
+      width: 200px;
+      text-align: center;
+      left: calc(50% - 100px);
+    }
   }
   .content {
     padding: 32px;

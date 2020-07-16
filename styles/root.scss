@@ -6,3 +6,17 @@ body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background: $background-primary;
 }
+
+.text-button {
+  font-family: inherit;
+  font-size: 15px;
+  color: $primary-color;
+  font-weight: 500;
+  line-height: 1;
+  padding: 12px;
+  border-radius: 5px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
