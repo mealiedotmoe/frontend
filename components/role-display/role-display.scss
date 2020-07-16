@@ -1,0 +1,31 @@
+@import "../../styles/vars.scss";
+
+.role-display {
+  display: flex;
+  background: rgba(0,0,0,.5);
+  margin: 16px 0;
+  color: #ffffff;
+  padding-left: 16px;
+  border-radius: 5px;
+
+  .role-name {
+    flex-grow: 1;
+    padding: 16px;
+  }
+  .display {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+
+    &.dark-display {
+      background-color: $discord-color;
+    }
+    &.light-display {
+      background-color: #ffffff;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}

@@ -13,7 +13,7 @@
     .context-change-text-button {
       @extend .text-button;
       position: absolute;
-      bottom: 10px;
+      bottom: 22px;
       width: 200px;
       text-align: center;
       left: calc(50% - 100px);
@@ -21,5 +21,55 @@
   }
   .content {
     padding: 32px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+
+    .roles-representations {
+      display: grid;
+      grid-template-columns: 7fr 3fr;
+
+      .list-view {
+        .selected {
+          box-shadow: rgba(0,0,0,.8) 0 6px 10px;
+          background-color: #313148;
+          transition: 75ms all ease;
+        }
+
+        .display-text-input {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+
+          .label {
+            color: rgba(255,255,255,.7);
+            margin-right: 32px;
+          }
+        }
+      }
+      .contrast-warn-list {
+        .contrast-check-title {
+          font-weight: 500;
+          color: #ffffff;
+          margin: 8px 0 22px 16px;
+        }
+        .warn-container {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          margin: 16px 0;
+          color: rgba(255,255,255,.6);
+
+          .warn {
+            padding: 16px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+
+            .icon {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
   }
 }
