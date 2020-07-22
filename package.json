@@ -25,9 +25,11 @@
     "mobx-react": "^6.2.2",
     "next": "^9.4.4",
     "react": "^16.13.1",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-draggable": "^4.4.3",
     "react-icons": "^3.10.0",
+    "react-markdown": "^4.3.1",
     "sass": "^1.26.10"
   },
   "devDependencies": {
@@ -35,6 +37,7 @@
     "@types/color": "^3.0.1",
     "@types/node": "^14.0.23",
     "@types/react": "^16.9.43",
+    "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-dom": "^16.9.8",
     "typescript": "^3.9.6"
   }

@@ -8,6 +8,7 @@ import { ROLES } from '../utils/roles';
 import { RoleDisplay } from '../components/role-display/role-display';
 import Color from 'color';
 import { MdCheck, MdClose } from "react-icons/md";
+import { Navigator } from '../components/navigator/navigator';
 
 @observer
 class Palette extends React.Component<{}> {
@@ -99,6 +100,7 @@ class Palette extends React.Component<{}> {
               ))}
             </section>
           </section>
+          <Navigator />
         </main>
       </section>
     )

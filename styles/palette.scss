@@ -23,6 +23,7 @@
     padding: 32px;
     height: calc(100vh - 64px);
     overflow-y: auto;
+    position: relative;
 
     .roles-representations {
       display: grid;
@@ -31,7 +32,7 @@
       .list-view {
         .selected {
           box-shadow: rgba(0,0,0,.8) 0 6px 10px;
-          background-color: #313148;
+          background-color: $active-state-color;
           transition: 75ms all ease;
         }
 

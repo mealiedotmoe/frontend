@@ -1,0 +1,29 @@
+@import "../../styles/vars.scss";
+
+.navigator {
+  position: fixed;
+  bottom: 16px;
+  width: 680px;
+  right: 282px;
+  background: $active-state-color;
+  border-radius: 5px;
+  padding: 16px 24px;
+  font-size: 13px;
+  box-shadow: 0 6px 5px rgba(0,0,0,.45);
+  color: #ffffff;
+  display: flex;
+
+  .links {
+    margin: 0 12px;
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+
+    .link {
+      color: $primary-color;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

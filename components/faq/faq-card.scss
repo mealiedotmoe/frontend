@@ -1,0 +1,33 @@
+@import "../../styles/vars.scss";
+
+.faq-card {
+  margin: 16px 0;
+  border-radius: 5px;
+  background-color: #39394679;
+  box-shadow: rgba(0,0,0,.3) 0 2px 3px;
+  padding: 16px 26px;
+  cursor: pointer;
+
+  &.selected {
+    background-color: #393946;
+  }
+
+  .faq-card-title {
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(255,255,255,.9);
+    line-height: 1.4;
+  }
+  .faq-card-tags {
+    display: flex;
+    margin-top: 16px;
+  }
+}
+.faq-tag {
+  border-radius: 24px;
+  padding: 6px 12px;
+  font-size: 13px;
+  width: 95px;
+  text-align: center;
+  font-weight: 600;
+}
