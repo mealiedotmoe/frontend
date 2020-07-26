@@ -23,6 +23,22 @@ export interface IInfoPost {
   content: string;
 }
 
+export interface User {
+  "username": string,
+  "discord_id": string,
+  "birthday": string,
+  "anilist": string,
+  "waifu": string,
+  "admin": boolean
+}
+
 export interface APIError {
   error: boolean;
 }
+
+export interface DecodedJWT {
+  exp: number;
+  isAdmin: boolean;
+  sub: string;
+  username: string;
+};

@@ -6,15 +6,24 @@ export interface FAQCardProps extends IFAQ {
   selected?: boolean;
 }
 
-export const FAQCard: React.FunctionComponent<FAQCardProps> = (props): JSX.Element => (
-  <section className={`faq-card ${props.selected && "selected"}`}>
-    <section className="faq-card-title">
-      {props.title}
+export const FAQCard: React.FunctionComponent<FAQCardProps & { createNew?: boolean; }> = (props): JSX.Element => {
+  if (props.createNew) {
+    return (
+      <section className="faq-card create">
+        Create new FAQ
+      </section>
+    );
+  }
+  return (
+    <section className={`faq-card ${props.selected && "selected"}`}>
+      <section className="faq-card-title">
+        {props.title}
+      </section>
+      <section className="faq-card-tags">
+        <div className="faq-tag" style={{ background: props.color, color: Color(props.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}>
+          <span>{props.tag}</span>
+        </div>
+      </section>
     </section>
-    <section className="faq-card-tags">
-      <div className="faq-tag" style={{ background: props.color, color: Color(props.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}>
-        <span>{props.tag}</span>
-      </div>
-    </section>
-  </section>
-);
+  );
+};

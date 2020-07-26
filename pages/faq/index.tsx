@@ -9,6 +9,7 @@ import { FAQCard } from '../../components/faq/faq-card';
 import { GetServerSidePropsContext, GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Scrollbars from "react-custom-scrollbars";
 import Link from 'next/link';
+import cookies from 'next-cookies';
 
 @observer
 class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -54,7 +55,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
         <main className="faq-card-content">
           <PageTitle title="Frequently Asked Questions" />
           {this.renderCardContent}
-          <Navigator />
+          <Navigator loggedIn={Boolean(this.props.sessionToken)} />
         </main>
       </section>
     );
@@ -63,11 +64,16 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
 
 export default FAQ;
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{
+  faqs: Array<IFAQ>;
+  sessionToken: string|null;
+}> = async (context: GetServerSidePropsContext) => {
   const results = await apiFetch<Array<IFAQ>>("/faq", "GET");
+  const sessionToken = cookies(context)["session-jwt"] ?? null;
   return {
     props: {
-      faqs: results
+      faqs: results,
+      sessionToken
     }, // will be passed to the page component as props
   };
 }

@@ -1,0 +1,71 @@
+@import "../vars.scss";
+
+.admin-home {
+  display: grid;
+  grid-template-columns: 8fr 5fr;
+
+  .hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &::after {
+      content: ' ';
+      z-index: -1;
+      background: url("/images/darlifra-air-poster.jpg");
+      background-position-y: 45%;
+      background-size: cover;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0.7;
+    }
+
+    .hero-text {
+      margin-left: 10vw;
+      
+      .title {
+        font-size: 96px;
+        margin: 18px 0;
+        color: #ffffff;
+        margin-top: 0;
+      }
+      .subtitle {
+        font-size: 24px;
+        margin: 6px 0;
+        color: #f0f0f0;
+      }
+      .description {
+        font-size: 14px;
+        color: rgba(255,255,255,.8);
+      }
+    }
+  }
+  .link-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    .links {
+      .link {
+        display: flex;
+        font-weight: 600;
+        font-size: 24px;
+        margin: 42px 0;
+        color: $primary-color;
+        align-items: center;
+        .icon {
+          font-size: 18px !important;
+          margin-right: 16px;
+          padding: 8px;
+          background-color: $color-yellow;
+          border-radius: 50%;
+          color: #000000;
+        }
+      }
+    }
+  }
+}
