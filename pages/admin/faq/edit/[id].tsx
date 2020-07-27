@@ -26,7 +26,8 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
 
   public componentDidMount() {
     if (!this.props.isAdmin) {
-      redirectToLogin();
+      // redirectToLogin();
+      console.log(this.props);
       return null;
     }
     this.faqContent.content = this.props.currentFAQ.content;
@@ -91,6 +92,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
         </aside>
         <section className="faq-card-content">
           <PageTitle title={`Editing: ${this.props.currentFAQ.title}`} />
+          <div onClick={() => redirectToLogin()}>redirect</div>
           <section className="tag-control">
             <div
               className="faq-tag"
@@ -130,8 +132,12 @@ export const getServerSideProps: GetServerSideProps<{
   const faqID = context.params?.id as string | undefined;
   const currentFAQ = await apiFetch<ISpecificFAQ>(`/faq/${faqID}`, "GET");
 
+  console.log(sessionToken);
+
   if (sessionToken) {
+    console.log("session token is valid");
     const { isAdmin, username, sub } = jwt.decode(sessionToken) as DecodedJWT;
+    console.log({ isAdmin, username, sub });
     return {
       props: {
         isAdmin,
