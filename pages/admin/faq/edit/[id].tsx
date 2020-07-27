@@ -10,7 +10,9 @@ import Link from 'next/link';
 import { FAQCard } from '../../../../components/faq/faq-card';
 import Color from 'color';
 import { observer } from 'mobx-react';
-import { observable, computed, observe } from 'mobx';
+import { observable, computed, action } from 'mobx';
+import { ChromePicker } from "react-color";
+import Head from 'next/head';
 
 @observer
 class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -18,18 +20,18 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
     content: ""
   };
   @observable private textAreaRef: React.RefObject<HTMLTextAreaElement> = React.createRef<HTMLTextAreaElement>();
+  @observable private tag: string = "";
+  @observable private color: string = "#FFFFFF";
+  @observable private displayColorPicker: boolean = false;
 
   public componentDidMount() {
     if (!this.props.isAdmin) {
       redirectToLogin();
       return null;
     }
-    observe(this.faqContent, (change) => {
-      if (!this.textAreaRef.current) return;
-      this.textAreaRef.current.style.height = "0px";
-      this.textAreaRef.current.style.height = `${this.textAreaRef.current.scrollHeight}px`;
-    });
     this.faqContent.content = this.props.currentFAQ.content;
+    this.color = this.props.currentFAQ.color;
+    this.tag = this.props.currentFAQ.tag;
   }
 
   @computed public get renderEditor(): React.ReactNode {
@@ -40,19 +42,38 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
           className="editor" onChange={ev => this.faqContent.content = ev.target.value}
           ref={this.textAreaRef}
           style={{
-            minHeight: this.textAreaRef.current?.scrollHeight ?? 400,
+            minHeight: 500,
           }}
         />
-        <button className="button">
+        <button className="button" onClick={() => this.save()}>
           Save FAQ
         </button>
       </section>
     );
   }
 
+  private async save(): Promise<void> {
+    const response = await apiFetch<{}>(`/faq/${this.props.currentFAQ.id}`, "PUT", {
+      title: this.props.currentFAQ.title,
+      content: this.faqContent.content,
+      tag: this.tag,
+      color: this.color
+    });
+    console.log(response);
+  }
+
+  @action private editTag(): void {
+    //
+  }
+
   public render() {
     return (
       <main className="faq-admin-container">
+        <Head>
+          <title>
+            Editing: {this.props.currentFAQ.title}; Mealie.Moe - Admin
+          </title>
+        </Head>
         <aside className="faq-card-list">
         <h1 className="title">Edit List</h1>
           <Link href="/admin/faq/create">
@@ -70,12 +91,26 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
         </aside>
         <section className="faq-card-content">
           <PageTitle title={`Editing: ${this.props.currentFAQ.title}`} />
-          <div
-            className="faq-tag"
-            style={{ background: this.props.currentFAQ.color, color: Color(this.props.currentFAQ.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
-          >
-            <span>{this.props.currentFAQ.tag}</span>
-          </div>
+          <section className="tag-control">
+            <div
+              className="faq-tag"
+              style={{ background: this.color, color: Color(this.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
+              onClick={() => this.editTag()}
+            >
+              <input className="tag-input" value={this.tag} onChange={ev => this.tag = ev.target.value} />
+            </div>
+            <section className="change-color-control" onClick={() => this.displayColorPicker = true}>
+              <span>
+                Change Color
+              </span>
+            </section>
+            {this.displayColorPicker && (
+              <section className="popover">
+                <div className="backdrop" onClick={() => this.displayColorPicker = false} />
+                <ChromePicker color={this.color} onChange={ev => this.color = ev.hex} />
+              </section>
+            )}
+          </section>
           {this.renderEditor}
         </section>
       </main>

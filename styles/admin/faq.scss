@@ -56,6 +56,48 @@
       mix-blend-mode: difference;
     }
 
+    .tag-control {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .faq-tag {
+        .tag-input {
+          font-family: inherit;
+          font-size: inherit;
+          background: transparent;
+          font-weight: inherit;
+          color: inherit;
+          width: 100%;
+          border: none;
+          outline: none;
+          text-align: center;
+        }
+      }
+
+      .change-color-control {
+        position: relative;
+        span {
+          color: $primary-color;
+          margin-left: 16px;
+          cursor: pointer;
+        }
+      }
+      .popover {
+        position: absolute;
+        bottom: -250px;
+        z-index: 2;
+
+        .backdrop {
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+
     .editor-container {
       margin-top: 32px;
       margin-bottom: 10vh;

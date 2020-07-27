@@ -6,6 +6,7 @@ export async function apiFetch<T>(uri: string, method: "GET" | "PUT" | "POST", d
   const httpOptions: RequestInit = {
     method,
     headers: {},
+    credentials: "include"
   };
   if (data) {
     httpOptions.body = JSON.stringify(data);
