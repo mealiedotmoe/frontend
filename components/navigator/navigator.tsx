@@ -5,6 +5,7 @@ import { API_BASE } from '../../utils/api-fetch';
 
 export interface NavigatorProps {
   loggedIn?: boolean;
+  centered?: boolean;
 }
 
 function conditionalRender(loggedIn: boolean): React.ReactNode {
@@ -20,8 +21,8 @@ function conditionalRender(loggedIn: boolean): React.ReactNode {
   );
 }
 
-export const Navigator: React.FunctionComponent<NavigatorProps> = ({ loggedIn }): JSX.Element => (
-  <section className="navigator">
+export const Navigator: React.FunctionComponent<NavigatorProps> = ({ loggedIn, centered }): JSX.Element => (
+  <section className={`navigator ${centered && "centered"}`}>
     <label className="navigator-title">
       Navigate
     </label>

@@ -43,6 +43,13 @@
     height: calc(100vh - 64px);
     overflow-y: auto;
 
+    .title-input {
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 32px;
+      width: 70%;
+    }
+
     .faq-title {
       color: #ffffff;
       font-weight: 700;
@@ -98,6 +105,10 @@
       }
     }
 
+    .text-field {
+      padding: 10px 16px;
+    }
+
     .editor-container {
       margin-top: 32px;
       margin-bottom: 10vh;
@@ -116,6 +127,14 @@
         border: none;
         outline: none;
         margin-bottom: 18px;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        & > .button {
+          margin-left: 14px;
+        }
       }
     }
   }

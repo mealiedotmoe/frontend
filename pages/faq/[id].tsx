@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { apiFetch } from '../../utils/api-fetch';
-import { IFAQ, ISpecificFAQ, User } from '../../utils/api-return-types';
+import { IFAQ, ISpecificFAQ, User, DecodedJWT } from '../../utils/api-return-types';
 import Link from 'next/link';
 import { FAQCard } from '../../components/faq/faq-card';
 import Head from 'next/head';
@@ -11,23 +11,17 @@ import { Navigator } from '../../components/navigator/navigator';
 import Markdown from "react-markdown";
 import Color from 'color';
 import cookies from "next-cookies";
+import jwt from "jsonwebtoken";
 
 class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public get renderFAQCards(): React.ReactNode {
     const faqs: Array<IFAQ> = this.props.faqs;
-    const selectedFAQ = this.props.faqContent;
-    const nodes = [(
-      <Link href={`/faq/${selectedFAQ.id}`} key={selectedFAQ.id}>
-        <a><FAQCard {...selectedFAQ} selected={selectedFAQ.id === this.props.faqContent.id} /></a>
-      </Link>
-    )];
-
-    nodes.push(...faqs.filter(faq => faq.id !== selectedFAQ.id).sort((a, b) => a.id - b.id).map(faq => (
+    
+    return faqs.sort((a, b) => a.id - b.id).map(faq => (
       <Link href={`/faq/${faq.id}`} key={faq.id}>
         <a><FAQCard {...faq} selected={faq.id === this.props.faqContent.id} /></a>
       </Link>
-    )));
-    return nodes;
+    ));
   }
 
   public get renderCardContent(): React.ReactNode {
@@ -52,12 +46,22 @@ class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getS
         </aside>
         <main className="faq-card-content">
           <PageTitle title={`${this.props.faqContent.title} - FAQ`} />
-          <div
-            className="faq-tag"
-            style={{ background: this.props.faqContent.color, color: Color(this.props.faqContent.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
-          >
-            <span>{this.props.faqContent.tag}</span>
-          </div>
+          <section className="tags-container">
+            <div
+              className="faq-tag"
+              style={{ background: this.props.faqContent.color, color: Color(this.props.faqContent.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
+            >
+              <span>{this.props.faqContent.tag}</span>
+            </div>
+            {this.props.isAdmin && (
+              <>
+                <Link href={`/admin/faq/edit/${this.props.faqContent.id}`}>
+                  <a>Edit FAQ</a>
+                </Link>
+                <span className="text-hint">This link is only visible to admins</span>
+              </>
+            )}
+          </section>
           {this.renderCardContent}
           <Navigator loggedIn={this.props.loggedIn} />
         </main>
@@ -74,8 +78,9 @@ export const getServerSideProps: GetServerSideProps<{
   author?: User;
   lastEditor?: User;
   loggedIn: boolean;
+  isAdmin: boolean;
 }> = async (context: GetServerSidePropsContext) => {
-  const { token } = cookies(context);
+  const token = cookies(context)['session-jwt'];
   const faqs = await apiFetch<Array<IFAQ>>("/faq", "GET");
   const faqContent = await apiFetch<ISpecificFAQ>(`/faq/${context.params?.id}`, "GET");
   if (!token) {
@@ -83,20 +88,19 @@ export const getServerSideProps: GetServerSideProps<{
       props: {
         faqs,
         faqContent,
-        loggedIn: Boolean(token)
+        loggedIn: Boolean(token),
+        isAdmin: false
       }
     };
   }
 
-  const author = await apiFetch<User>(`/user/${faqContent.author}`, "GET");
-  const lastEditor = faqContent.last_edit === faqContent.author ? author : await apiFetch<User>(`/user/${faqContent.last_edit}`, "GET");
+  const { isAdmin } = jwt.decode(token) as DecodedJWT;
   return {
     props: {
       faqs,
       faqContent,
-      author,
-      lastEditor,
-      loggedIn: Boolean(token)
+      loggedIn: Boolean(token),
+      isAdmin
     },
   };
 }

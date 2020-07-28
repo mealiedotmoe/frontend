@@ -12,6 +12,10 @@
   box-shadow: 0 6px 5px rgba(0,0,0,.45);
   color: #ffffff;
   display: flex;
+  
+  &.centered {
+    right: calc(50vw - 340px - 24px);
+  }
 
   .links {
     margin: 0 12px;
@@ -24,6 +28,7 @@
       font-weight: 500;
       display: flex;
       align-items: center;
+      border-bottom: none;
     }
   }
 }

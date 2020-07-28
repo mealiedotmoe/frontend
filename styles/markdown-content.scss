@@ -1,3 +1,5 @@
+@import "./vars.scss";
+
 .markdown-content {
   color: rgba(255,255,255,0.6);
   line-height: 2;
@@ -45,5 +47,10 @@
     background-color: rgba(0,0,0,0.6);
     border-radius: 5px;
     padding: 4px;
+  }
+
+  a {
+    color: $primary-color;
+    border-bottom: 2px solid $primary-color;
   }
 }

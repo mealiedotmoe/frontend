@@ -49,6 +49,15 @@
       mix-blend-mode: difference;
     }
 
+    .tags-container {
+      display: flex;
+      align-items: center;
+      
+      & > * {
+        margin: 0 6px;
+      }
+    }
+
     .card-content-hint {
       margin-top: 64px;
 

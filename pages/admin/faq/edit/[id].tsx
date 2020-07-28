@@ -13,6 +13,7 @@ import { observer } from 'mobx-react';
 import { observable, computed, action } from 'mobx';
 import { ChromePicker } from "react-color";
 import Head from 'next/head';
+import Router from 'next/router';
 
 @observer
 class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -36,7 +37,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
 
   @computed public get renderEditor(): React.ReactNode {
     return (
-      <section className="editor-container">
+      <form className="editor-container" onSubmit={ev => { ev.preventDefault(); this.save(); }}>
         <textarea
           value={this.faqContent.content}
           className="editor" onChange={ev => this.faqContent.content = ev.target.value}
@@ -45,25 +46,30 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
             minHeight: 500,
           }}
         />
-        <button className="button" onClick={() => this.save()}>
-          Save FAQ
-        </button>
-      </section>
+        <section className="actions">
+          <Link href="/markdown-guide">
+            <a className="link" target="__blank">Markdown guide</a>
+          </Link>
+          <div className="flex-grow" />
+          <button className="button text">
+            Preview
+          </button>
+          <button className="button" type="submit">
+            Save FAQ
+          </button>
+        </section>
+      </form>
     );
   }
 
   private async save(): Promise<void> {
-    const response = await apiFetch<{}>(`/faq/${this.props.currentFAQ.id}`, "PUT", {
+    const response = await apiFetch<ISpecificFAQ>(`/faq/${this.props.currentFAQ.id}`, "PUT", {
       title: this.props.currentFAQ.title,
       content: this.faqContent.content,
       tag: this.tag,
       color: this.color
     });
-    console.log(response);
-  }
-
-  @action private editTag(): void {
-    //
+    Router.push(`/faq/${response.id}`);
   }
 
   public render() {
@@ -95,7 +101,6 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
             <div
               className="faq-tag"
               style={{ background: this.color, color: Color(this.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
-              onClick={() => this.editTag()}
             >
               <input className="tag-input" value={this.tag} onChange={ev => this.tag = ev.target.value} />
             </div>
