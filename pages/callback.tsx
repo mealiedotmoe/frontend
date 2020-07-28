@@ -9,11 +9,10 @@ import Router from "next/router";
 class Callback extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public componentDidMount() {
     const backTo = window.localStorage.getItem("callback-to");
-    console.log("Back to:", backTo);
     if (backTo) {
       // Clear the state
       window.localStorage.removeItem("callback-to");
-      // Router.push(backTo);
+      Router.push(backTo);
       return;
     }
     console.log("Oops...", backTo);
