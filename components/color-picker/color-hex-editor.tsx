@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { HSLColor } from './color-picker';
 
 export interface ColorHexEditorProps {
   value: string

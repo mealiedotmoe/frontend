@@ -2,13 +2,14 @@ import * as React from 'react';
 import { observer } from "mobx-react";
 import { observable, action } from "mobx";
 import Head from 'next/head';
-import { ColorPicker, HSLColor } from '../components/color-picker/color-picker';
+import { default as ColorPicker } from '../components/color-picker/color-picker';
 import { PageTitle } from '../components/page-title/page-title';
 import { ROLES } from '../utils/roles';
 import { RoleDisplay } from '../components/role-display/role-display';
 import Color from 'color';
 import { MdCheck, MdClose } from "react-icons/md";
 import { Navigator } from '../components/navigator/navigator';
+import { HSLColor } from 'react-color';
 
 @observer
 class Palette extends React.Component<{}> {
@@ -16,22 +17,18 @@ class Palette extends React.Component<{}> {
   @observable private roleColorMap: { [key: string]: string; } = {};
   @observable private selectedRole: string = "Clover";
   @observable private displayText: string = "Sample";
-  private lastColor = "#FF0000";
 
   public constructor(props: {}) {
     super(props);
-    ROLES.forEach(role => this.roleColorMap[role] = "#FF0000");
+    ROLES.forEach(role => this.roleColorMap[role] = '#FFFFFF');
   } 
   
-  @action private changeSelectedColor(color: HSLColor): void {
-    const hex = Color(`hsl(${color.hue}, ${color.saturation * 100}%, ${color.luminance}%)`).hex();
-    this.roleColorMap[this.selectedRole] = hex;
-    this.lastColor = hex;
+  @action private changeSelectedColor(color: string): void {
+    this.roleColorMap[this.selectedRole] = color;
   }
 
   @action private selectRole(role: string): void {
     this.selectedRole = role;
-    this.roleColorMap[role] = this.lastColor;
   }
   
   public render() {
@@ -41,7 +38,7 @@ class Palette extends React.Component<{}> {
           <title>Color Palette: Mealie.Moe</title>
         </Head>
         <aside className="color-picker-container">
-          <ColorPicker onChange={(color) => this.changeSelectedColor(color)} />
+          <ColorPicker color={this.roleColorMap[this.selectedRole]} onChange={(color) => this.changeSelectedColor(color.hex)} />
           <button className="context-change-text-button">
             Use {this.picker === "image" ? "color palette" : "an image"} instead
           </button>

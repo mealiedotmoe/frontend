@@ -4,6 +4,7 @@
 .color-picker {
   height: calc(100%);
   width: calc(100%);
+  user-select: none;
 
   .picker-body {
     height: 80%;
@@ -46,6 +47,11 @@
       line-height: 1;
     }
     .slider-container {
+      position: relative;
+      height: 6px;
+      .slider-handle {
+        margin-top: -2.5px !important;
+      }
       .slider {
         height: 6px;
         border-radius: 6px;
@@ -54,17 +60,6 @@
 
         &.main-color {
           background: $main-color-gradient;
-        }
-
-        .slider-handle {
-          position: absolute;
-          top: -4.1px;
-          width: 9px;
-          height: 9px;
-          border: solid #fff 3px;
-          border-radius: 50%;
-          cursor: grab;
-          outline: none;
         }
       }
     }
@@ -96,5 +91,15 @@
       max-width: 120px;
       text-align: center;
     }
+  }
+  
+
+  .slider-handle {
+    width: 6px;
+    height: 6px;
+    border: solid #fff 3px;
+    border-radius: 50%;
+    cursor: grab;
+    outline: none;
   }
 }
