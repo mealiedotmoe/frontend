@@ -28,7 +28,11 @@ class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getS
     const faq = this.props.faqContent as ISpecificFAQ;
     return (
       <section style={{ marginTop: 24 }}>
-        <Markdown source={faq.content} className="markdown-content" />
+        <Markdown
+          source={faq.content}
+          className="markdown-content"
+          renderers={{ link: props => <a href={props.href} target="_blank" rel="noopener noreferrer">{props.children}</a> }}
+        />
       </section>
     )
   }

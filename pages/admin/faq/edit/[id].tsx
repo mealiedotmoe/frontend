@@ -14,6 +14,8 @@ import { observable, computed, action } from 'mobx';
 import { ChromePicker } from "react-color";
 import Head from 'next/head';
 import Router from 'next/router';
+import { Navigator } from '../../../../components/navigator/navigator';
+import ReactMarkdown from 'react-markdown';
 
 @observer
 class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -24,6 +26,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
   @observable private tag: string = "";
   @observable private color: string = "#FFFFFF";
   @observable private displayColorPicker: boolean = false;
+  @observable private displayRenderContent: boolean = false;
 
   public componentDidMount() {
     if (!this.props.isAdmin) {
@@ -36,6 +39,8 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
   }
 
   @computed public get renderEditor(): React.ReactNode {
+    if (this.displayRenderContent) return null;
+
     return (
       <form className="editor-container" onSubmit={ev => { ev.preventDefault(); this.save(); }}>
         <textarea
@@ -51,7 +56,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
             <a className="link" target="__blank">Markdown guide</a>
           </Link>
           <div className="flex-grow" />
-          <button className="button text">
+          <button className="button text" type="button" onClick={() => this.displayRenderContent = true}>
             Preview
           </button>
           <button className="button" type="submit">
@@ -60,6 +65,23 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
         </section>
       </form>
     );
+  }
+
+  @computed private get renderedContent(): React.ReactNode {
+    if (!this.displayRenderContent) return null;
+
+    return (
+      <section className="rendered-content-container">
+        <ReactMarkdown
+          source={this.faqContent.content}
+          className="markdown-content"
+          renderers={{ link: props => <a href={props.href} target="_blank" rel="noopener noreferrer">{props.children}</a> }}
+        />
+        <button className="button text" onClick={() => this.displayRenderContent = false}>
+          Close Preview
+        </button>
+      </section>
+    )
   }
 
   private async save(): Promise<void> {
@@ -81,12 +103,12 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
           </title>
         </Head>
         <aside className="faq-card-list">
-        <h1 className="title">Edit List</h1>
           <Link href="/admin/faq/create">
             <a>
               <FAQCard tag="" title="" color="" id={0} createNew />
             </a>
           </Link>
+          <h1 className="title">Edit List</h1>
           {this.props.faqs.map(faq => (
             <Link href={`/admin/faq/edit/${faq.id}`} key={faq.id}>
               <a>
@@ -117,6 +139,8 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
             )}
           </section>
           {this.renderEditor}
+          {this.renderedContent}
+          <Navigator admin loggedIn />
         </section>
       </main>
     )

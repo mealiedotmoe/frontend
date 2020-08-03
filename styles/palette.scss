@@ -1,4 +1,5 @@
 @import "./root.scss";
+@import "./vars.scss";
 
 .picker-container {
   width: 100vw;
@@ -25,49 +26,48 @@
     overflow-y: auto;
     position: relative;
 
-    .roles-representations {
+    .roles-display {
+      margin-top: 24px;
       display: grid;
-      grid-template-columns: 7fr 3fr;
+      grid-template-columns: 6fr 2fr 2fr;
+      color: rgba(255,255,255,.6);
 
-      .list-view {
-        .selected {
-          box-shadow: rgba(0,0,0,.8) 0 6px 10px;
-          background-color: $active-state-color;
-          transition: 75ms all ease;
-        }
+      & > * {
+        margin: 8px 10px;
+      }
 
-        .display-text-input {
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
+      .selected {
+        box-shadow: rgba(0,0,0,.8) 0 6px 10px;
+        background-color: $active-state-color;
+      }
 
-          .label {
-            color: rgba(255,255,255,.7);
-            margin-right: 32px;
+      .icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .status-icon {
+          font-size: 22px;
+          &.check {
+            color: $color-green;
+          }
+          &.warn {
+            color: $color-red;
           }
         }
       }
-      .contrast-warn-list {
-        .contrast-check-title {
-          font-weight: 500;
-          color: #ffffff;
-          margin: 8px 0 22px 16px;
-        }
-        .warn-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          margin: 16px 0;
-          color: rgba(255,255,255,.6);
 
-          .warn {
-            padding: 16px;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
+      .col-header {
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
 
-            .icon {
-              font-size: 18px;
-            }
+        &.input-header {
+          justify-content: flex-end;
+          .text-field {
+            margin-left: 16px;
           }
         }
       }

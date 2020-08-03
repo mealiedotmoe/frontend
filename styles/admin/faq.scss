@@ -109,6 +109,14 @@
       padding: 10px 16px;
     }
 
+    .rendered-content-container {
+      margin-top: 32px;
+      margin-bottom: 10vh;
+
+      .markdown-content {
+        margin-bottom: 16px;
+      }
+    }
     .editor-container {
       margin-top: 32px;
       margin-bottom: 10vh;

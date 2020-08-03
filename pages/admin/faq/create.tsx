@@ -15,6 +15,7 @@ import { ChromePicker } from 'react-color';
 import { observer } from 'mobx-react';
 import Router from "next/router";
 import { Alert } from '../../../components/alert/alert';
+import { Navigator } from '../../../components/navigator/navigator';
 
 @observer
 class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -130,6 +131,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
               </section>
             </section>
           </form>
+          <Navigator admin loggedIn />
         </main>
       </main>
     )
