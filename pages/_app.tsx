@@ -10,6 +10,7 @@ import "../styles/admin/home.scss";
 import "../styles/admin/faq.scss";
 import "../styles/markdown-guide.scss";
 import "../components/alert/alert.scss";
+import "../styles/admin/pages.scss";
 
 export default function MyApp({ Component, pageProps }: { Component: any; pageProps: any; }) {
   return (

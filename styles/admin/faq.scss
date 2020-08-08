@@ -69,6 +69,8 @@
       position: relative;
 
       .faq-tag {
+        cursor: pointer;
+
         .tag-input {
           font-family: inherit;
           font-size: inherit;
@@ -79,6 +81,7 @@
           border: none;
           outline: none;
           text-align: center;
+          cursor: inherit;
         }
       }
 
@@ -123,7 +126,8 @@
 
       .editor {
         font-family: inherit;
-        font-size: 18px;
+        font-size: 15px;
+        letter-spacing: inherit;
         background-color: rgba(0,0,0,.2);
         line-height: 2;
         color: rgba(255,255,255,.6);

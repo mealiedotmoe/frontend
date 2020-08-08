@@ -1,0 +1,83 @@
+.pages-admin {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: url("/images/zzl-darlifra.jpg");
+  background-size: cover;
+  background-position-y: 40%;
+
+  .content-container {
+    width: 45vw;
+    margin-left: calc(50vw - (45vw / 2) - 32px);
+    background: rgba(0,0,0,.92);
+    min-height: calc(100vh - (18px * 2));
+    padding: 18px 32px;
+
+    .title {
+      margin: 0;
+    }
+    .meta-container {
+      display: flex;
+
+      .title-input {
+        width: 60%;
+        transition: 75ms all ease;
+  
+        &:focus {
+          background-color: #000000;
+        }
+      }
+      .slug-input {
+        flex-grow: 1;
+        margin-left: 16px;
+
+        &:focus {
+          background-color: #000000;
+        }
+      }
+      .info-button {
+        margin-left: 8px;
+        font-size: 11px;
+      }
+    }
+    .editor {
+      font-family: inherit;
+      font-size: 15px;
+      letter-spacing: inherit;
+      background-color: rgba(0,0,0,.4);
+      line-height: 2;
+      color: rgba(255,255,255,.6);
+      border-radius: 5px;
+      width: calc(100% - 24px);
+      max-width: calc(100% - 24px);
+      min-width: calc(100% - 24px);
+      padding: 12px;
+      border: none;
+      outline: none;
+      transition: 75ms all ease;
+      margin: 18px 0;
+
+      &:focus {
+        background-color: #000000;
+      }
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10vh;
+
+      & > * {
+        margin-right: 10px;
+      }
+    }
+
+    .markdown-content {
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      min-height: 60vh;
+      padding: 12px;
+    }
+  }
+}

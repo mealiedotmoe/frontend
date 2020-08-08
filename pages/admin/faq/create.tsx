@@ -10,12 +10,13 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { PageTitle } from '../../../components/page-title/page-title';
 import Color from 'color';
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 import { ChromePicker } from 'react-color';
 import { observer } from 'mobx-react';
 import Router from "next/router";
 import { Alert } from '../../../components/alert/alert';
 import { Navigator } from '../../../components/navigator/navigator';
+import ReactMarkdown from 'react-markdown';
 
 @observer
 class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -25,6 +26,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
   @observable private title: string = "";
   @observable private content: string = "";
   @observable private error?: string;
+  @observable private renderContentPreview: boolean = false;
 
   public componentDidMount() {
     if (!this.props.isAdmin) {
@@ -57,6 +59,44 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
     });
     const createdFAQId = response.id;
     Router.push(`/faq/${createdFAQId}`);
+  }
+
+  @computed private get renderContent(): React.ReactNode {
+    if (this.renderContentPreview) return (
+      <main className="rendered-content-container">
+        <ReactMarkdown source={this.content} className="markdown-content" />
+        <button type="button" className="button text" onClick={() => this.renderContentPreview = false}>
+          Close Preview
+        </button>
+      </main>
+    );
+    
+    return (
+      <section className="editor-container">
+        <textarea
+          className="editor"
+          style={{ minHeight: 400 }}
+          placeholder="FAQ Content (markdown is supported)"
+          value={this.content}
+          onChange={ev => this.content = ev.target.value}
+        />
+        {this.error && (
+          <Alert message={this.error} />
+        )}
+        <section className="actions">
+          <Link href="/markdown-guide">
+            <a className="link" target="__blank">Markdown guide</a>
+          </Link>
+          <div className="flex-grow" />
+          <button className="button text" type="button" onClick={() => this.renderContentPreview = true}>
+            Preview
+          </button>
+          <button type="submit" className="button">
+            Save
+          </button>
+        </section>
+      </section>
+    );
   }
 
   public render() {
@@ -106,30 +146,8 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
           </section>
           <form onSubmit={ev => this.saveFAQ(ev)}>
             <input className="text-field title-input" placeholder="FAQ Title" value={this.title} onChange={ev => this.title = ev.target.value} />
-            <section className="editor-container">
-              <textarea
-                className="editor"
-                style={{ minHeight: 400 }}
-                placeholder="FAQ Content (markdown is supported)"
-                value={this.content}
-                onChange={ev => this.content = ev.target.value}
-              />
-              {this.error && (
-                <Alert message={this.error} />
-              )}
-              <section className="actions">
-                <Link href="/markdown-guide">
-                  <a className="link" target="__blank">Markdown guide</a>
-                </Link>
-                <div className="flex-grow" /> 
-                <button className="button text">
-                  Preview
-                </button>
-                <button type="submit" className="button">
-                  Save
-                </button>
-              </section>
-            </section>
+            
+            {this.renderContent}
           </form>
           <Navigator admin loggedIn />
         </main>
