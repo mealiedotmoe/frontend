@@ -42,3 +42,13 @@ export interface DecodedJWT {
   sub: string;
   username: string;
 };
+
+export interface InfoPage {
+  title: string;
+  slug: string;
+  content: string;
+  author: string;
+  last_edit: string;
+  created_at: string;
+  updated_at: string;
+}

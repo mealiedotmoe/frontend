@@ -77,6 +77,11 @@ class Palette extends React.Component<{}> {
               </>
             ))}
           </section>
+          <section className="actions">
+            <button className="button">
+              Create Palette
+            </button>
+          </section>
           <Navigator />
         </main>
       </section>

@@ -54,7 +54,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
       </label>
       <section className="links">
         <Link href="/faq"><a className="link">FAQ</a></Link>
-        <Link href="/info/rules"><a className="link">Rules</a></Link>
+        <Link href="/pages"><a className="link">Pages</a></Link>
         <Link href="/palette"><a className="link">Palette</a></Link>
         <Link href="/server-map"><a className="link">Server Map</a></Link>
         <a className="link" target="__blank" href="https://www.danbo.space">Leaderboards <MdOpenInNew /></a>

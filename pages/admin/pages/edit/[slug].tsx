@@ -1,32 +1,32 @@
 import * as React from 'react';
 import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { apiFetch } from '../../../utils/api-fetch';
+import { InfoPage, DecodedJWT } from '../../../../utils/api-return-types';
 import cookies from 'next-cookies';
+import { apiFetch } from '../../../../utils/api-fetch';
 import jwt from 'jsonwebtoken';
-import { DecodedJWT, InfoPage } from '../../../utils/api-return-types';
-import { redirectToLogin } from '../../../utils/login';
+import { redirectToLogin } from '../../../../utils/login';
 import Head from 'next/head';
-import { PageTitle } from '../../../components/page-title/page-title';
-import { observer } from 'mobx-react';
-import { observable, computed } from 'mobx';
-import ReactMarkdown from 'react-markdown';
+import { PageTitle } from '../../../../components/page-title/page-title';
 import ReactTooltip from 'react-tooltip';
-import { Navigator } from '../../../components/navigator/navigator';
+import { computed, observable } from 'mobx';
+import ReactMarkdown from 'react-markdown';
+import { Navigator } from '../../../../components/navigator/navigator';
+import { observer } from 'mobx-react';
 
 @observer
 class Pages extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   @observable private renderMarkdownPreview: boolean = false;
   @observable private content: string = "";
   @observable private title: string = "";
-  @observable private slug: string = "";
 
   public componentDidMount() {
     if (!this.props.isAdmin) {
       redirectToLogin();
       return;
     }
+    this.title = this.props.page.title;
+    this.content = this.props.page.content;
   }
-
   @computed private get renderContent(): React.ReactNode {
     if (this.renderMarkdownPreview) return (
       <ReactMarkdown source={this.content} className="markdown-content" />
@@ -44,22 +44,21 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
   }
 
   private async save(): Promise<void> {
-    const response = await apiFetch<InfoPage>("/info", "POST", {
-      title: this.title,
-      slug: this.slug,
-      content: this.content
+    const result = await apiFetch<InfoPage>(`/info/${this.props.page.slug}`, "PUT", {
+      content: this.content,
+      title: this.title
     });
-    window.location.pathname = `/pages/${response.slug}`;
+    window.location.pathname = `/pages/${result.slug}`;
   }
 
   public render() {
     return (
       <main className="pages-admin">
         <Head>
-          <title>Create - Page: Mealie.Moe</title>
+          <title>Edit - Page: Mealie.Moe</title>
         </Head>
         <article className="content-container">
-          <PageTitle title="Create Page" className="title" />
+          <PageTitle title="Edit Page" className="title" />
           <form onSubmit={ev => { ev.preventDefault(); this.save(); }}>
             <section className="meta-container">
               <input
@@ -68,14 +67,13 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
                 value={this.title}
                 onChange={ev => {
                   this.title = ev.target.value;
-                  this.slug = this.title.toLocaleLowerCase().replace(/ /g, "-");
                 }}
               />
               <input
                 className="text-field slug-input"
                 placeholder="Slug"
-                value={this.slug}
-                onChange={ev => this.slug = ev.target.value}
+                value={this.props.page.slug}
+                disabled
               />
               <button tabIndex={-1} data-tip data-for="slug-info" className="button text info-button" type="button">
                 Slug Info
@@ -83,7 +81,7 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
               <ReactTooltip type="light" id="slug-info" effect="solid" place="right">
                 Page will be visible at
                 <br />
-                https://mealie.moe/pages/{this.slug === "" ? <i>slug-goes-here</i> : this.slug}
+                https://mealie.moe/pages/{this.props.page.slug}
               </ReactTooltip>
             </section>
             {this.renderContent}
@@ -105,21 +103,31 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
   }
 }
 
-export default Pages;export const getServerSideProps: GetServerSideProps<{
+export default Pages;
+
+export const getServerSideProps: GetServerSideProps<{
+  loggedIn: boolean;
+  page: InfoPage;
   isAdmin: boolean;
 }> = async (context: GetServerSidePropsContext) => {
-  const sessionToken = cookies(context)["session-jwt"] ?? null;
-  if (sessionToken) {
-    const { isAdmin, username, sub } = jwt.decode(sessionToken) as DecodedJWT;
+  const token = cookies(context)['session-jwt'];
+  const page = await apiFetch<InfoPage>(`/info/${context.params?.slug}`, "GET");
+  if (token) {
+    const { isAdmin } = jwt.decode(token) as DecodedJWT;
     return {
       props: {
-        isAdmin,
+        loggedIn: true,
+        page,
+        isAdmin
       }
     };
   }
+
   return {
     props: {
-      isAdmin: false,
+      loggedIn: false,
+      page,
+      isAdmin: false
     }
-  };
+  }
 };

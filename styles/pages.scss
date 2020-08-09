@@ -1,0 +1,36 @@
+.page-view-container, .pages-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: url("/images/zzl-darlifra.jpg");
+  background-size: cover;
+  background-position-y: 40%;
+
+  .content-container {
+    width: 45vw;
+    margin-left: calc(50vw - (45vw / 2) - 32px);
+    background: rgba(0,0,0,.92);
+    min-height: calc(100vh - (18px * 2));
+    padding: 18px 32px;
+
+    .meta {
+      color: rgba(255,255,255,.5);
+      margin: 8px 0;
+      font-size: 15px;
+      display: flex;
+
+      .username {
+        margin: 0 16px;
+        color: #ffffff;
+      }
+      .date {
+        margin-left: 16px;
+      }
+    }
+
+    .markdown-content {
+      padding: 0;
+      background: transparent;
+    }
+  }
+}

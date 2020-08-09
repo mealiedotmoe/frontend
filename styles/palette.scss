@@ -72,5 +72,14 @@
         }
       }
     }
+
+    .actions {
+      margin-top: 16px;
+      display: flex;
+
+      & > .button:first-child {
+        margin-left: 14px;
+      }
+    }
   }
 }
