@@ -51,7 +51,7 @@ class AdminHome extends React.Component<InferGetServerSidePropsType<typeof getSe
                 Edit FAQs
               </a>
             </Link>
-            <Link href="/admin/pages/create">
+            <Link href="/admin/pages">
               <a className="link">
                 <MdPages className="icon" />
                 Edit Pages

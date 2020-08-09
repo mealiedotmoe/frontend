@@ -33,7 +33,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
           <Link href="/admin/users">
             <a className="link">Users</a>
           </Link>
-          <Link href="/admin/pages/create">
+          <Link href="/admin/pages">
             <a className="link">Pages</a>
           </Link>
           <Link href="/admin/faq/create">

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { InfoPage } from '../../utils/api-return-types';
+import { InfoPage } from '../../../utils/api-return-types';
 import { GetServerSidePropsContext, GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import cookies from 'next-cookies';
-import { apiFetch } from '../../utils/api-fetch';
-import { PageTitle } from '../../components/page-title/page-title';
-import { PageCard } from '../../components/page-card/page-card';
-import { Navigator } from '../../components/navigator/navigator';
+import { apiFetch } from '../../../utils/api-fetch';
+import { PageTitle } from '../../../components/page-title/page-title';
+import { PageCard } from '../../../components/page-card/page-card';
+import { Navigator } from '../../../components/navigator/navigator';
 import Head from 'next/head';
 
 class Pages extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -16,10 +16,10 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
           <title>Info Pages: Mealie.Moe</title>
         </Head>
         <main className="content-container">
-          <PageTitle title="Info Pages" />
-          {this.props.pages.map(page => <PageCard page={page} key={page.slug} />)}
+          <PageTitle title="Info Pages: Admin" />
+          {this.props.pages.map(page => <PageCard page={page} admin key={page.slug} />)}
         </main>
-        <Navigator centered loggedIn={this.props.loggedIn} />
+        <Navigator admin centered loggedIn={this.props.loggedIn} />
       </main>
     )
   }
