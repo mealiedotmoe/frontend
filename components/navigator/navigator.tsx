@@ -57,7 +57,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
         <Link href="/pages"><a className="link">Pages</a></Link>
         <Link href="/palette"><a className="link">Palette</a></Link>
         <Link href="/server-map"><a className="link">Server Map</a></Link>
-        <a className="link" target="__blank" href="https://www.danbo.space">Leaderboards <MdOpenInNew /></a>
+        <a className="link" target="__blank" href="https://www.danbo.space/leaderboards/148606162810568704">Leaderboards <MdOpenInNew /></a>
         {conditionalRender(Boolean(loggedIn))}
       </section>
     </section>
