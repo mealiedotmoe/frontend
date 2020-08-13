@@ -6,5 +6,6 @@ export const ROLES = [
   "Contributor",
   "Addicted",
   "Insomniac",
-  "No Lifer"
+  "No Lifer",
+  "Birthday"
 ]

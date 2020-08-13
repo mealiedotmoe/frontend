@@ -1,0 +1,51 @@
+.image-color-picker-container {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .dropzone-container {
+    width: calc(100% - 4px - 64px);
+    border: 2px dashed rgba(255,255,255,.6);
+    height: calc(100% - 4px - 64px - 32px);
+    margin: 32px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.6);
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .image-canvas {
+    margin: 32px 32px 0 32px;
+
+    & > canvas {
+      border-radius: 5px;
+    }
+  }
+
+  .current-color-display {
+    display: flex;
+    height: 32px;
+    color: rgba(255,255,255,.6);
+    font-size: 13px;
+    align-items: center;
+    height: 16px;
+    margin-top: 8px;
+
+    .current-color-box {
+      width: 13px;
+      height: 13px;
+      margin-right: 13px;
+    }
+    .current-color {
+      text-align: center;
+      text-transform: uppercase;
+      margin-left: 13px;
+      margin-right: 13px;
+    }
+  }
+}

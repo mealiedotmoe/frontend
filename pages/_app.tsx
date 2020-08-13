@@ -14,6 +14,7 @@ import "../styles/admin/pages.scss";
 import "../styles/pages.scss";
 import "../components/page-card/page-card.scss";
 import "../styles/not-found.scss";
+import "../components/image-color-picker/image-color-picker.scss";
 
 export default function MyApp({ Component, pageProps }: { Component: any; pageProps: any; }) {
   return (

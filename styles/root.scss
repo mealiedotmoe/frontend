@@ -96,6 +96,11 @@ body {
     color: $primary-color;
     box-shadow: none;
   }
+
+  &.small {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
 }
 
 .flex-grow {
@@ -106,6 +111,7 @@ body {
   color: $primary-color;
   text-decoration: none;
   border-bottom: 2px solid $primary-color;
+  cursor: pointer;
 }
 
 @keyframes progress-indeterminate {

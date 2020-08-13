@@ -2,6 +2,7 @@ import * as React from 'react';
 import { MdOpenInNew } from "react-icons/md";
 import Link from "next/link";
 import { API_BASE } from '../../utils/api-fetch';
+import { redirectToLogin } from '../../utils/login';
 
 export interface NavigatorProps {
   loggedIn?: boolean;
@@ -18,7 +19,7 @@ function conditionalRender(loggedIn: boolean): React.ReactNode {
     );
   }
   return (
-    <a className="link" href={`${API_BASE}/auth/login`}>Login</a>
+    <a className="link" onClick={() => redirectToLogin()}>Login</a>
   );
 }
 

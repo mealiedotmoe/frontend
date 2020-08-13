@@ -31,7 +31,7 @@ class Callback extends React.Component<InferGetServerSidePropsType<typeof getSer
         <Head>
           <title>Logging in: Mealie.Moe</title>
         </Head>
-        Hey there {this.props.username}
+        Hey there {this.props.username}&nbsp;
         Finalizing a couple things, just a second...
       </main>
     );

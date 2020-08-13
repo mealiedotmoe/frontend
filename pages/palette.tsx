@@ -9,6 +9,11 @@ import { RoleDisplay } from '../components/role-display/role-display';
 import Color, { lab } from 'color';
 import { MdCheck, MdClose } from "react-icons/md";
 import { Navigator } from '../components/navigator/navigator';
+import { ImageColorPicker } from '../components/image-color-picker/image-color-picker';
+import { paletteCreator } from '../utils/palette-creator';
+import { apiFetch } from '../utils/api-fetch';
+import { User } from '../utils/api-return-types';
+import { redirectToLogin } from '../utils/login';
 
 @observer
 class Palette extends React.Component<{}> {
@@ -29,6 +34,19 @@ class Palette extends React.Component<{}> {
   @action private selectRole(role: string): void {
     this.selectedRole = role;
   }
+
+  private async createPalette(): Promise<void> {
+    try {
+      const currentUser = await apiFetch<User>("/user/me", "GET");
+
+      const canvas = paletteCreator(this.roleColorMap, currentUser.username);
+      const image = canvas.toDataURL();
+      console.log(image);
+    } catch (e) {
+      // Possible error is that we aren't logged in yet;
+      redirectToLogin();
+    }
+  }
   
   public render() {
     return (
@@ -37,8 +55,12 @@ class Palette extends React.Component<{}> {
           <title>Color Palette: Mealie.Moe</title>
         </Head>
         <aside className="color-picker-container">
-          <ColorPicker color={this.roleColorMap[this.selectedRole]} onChange={(color) => this.changeSelectedColor(color.hex)} />
-          <button className="context-change-text-button">
+          {this.picker === "image" ? (
+            <ImageColorPicker onChange={color => this.changeSelectedColor(color)} />
+          ) : (
+            <ColorPicker color={this.roleColorMap[this.selectedRole]} onChange={(color) => this.changeSelectedColor(color.hex)} />
+          )}
+          <button className="context-change-text-button" onClick={() => this.picker = this.picker === "image" ? "palette" : "image"}>
             Use {this.picker === "image" ? "color palette" : "an image"} instead
           </button>
         </aside>
@@ -78,7 +100,7 @@ class Palette extends React.Component<{}> {
             ))}
           </section>
           <section className="actions">
-            <button className="button">
+            <button className="button" onClick={() => this.createPalette()}>
               Create Palette
             </button>
           </section>

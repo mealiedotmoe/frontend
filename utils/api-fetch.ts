@@ -12,5 +12,8 @@ export async function apiFetch<T>(uri: string, method: "GET" | "PUT" | "POST", d
     httpOptions.body = JSON.stringify(data);
   }
   const response = await fetch(`${API_BASE}${uri}`, httpOptions);
+  if (response.status !== 200) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
   return response.json();
 }
