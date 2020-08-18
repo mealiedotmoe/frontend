@@ -95,16 +95,47 @@ body {
     background-color: transparent;
     color: $primary-color;
     box-shadow: none;
+
+    &:disabled {
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+    }
   }
 
   &.small {
     font-size: 12px;
     padding: 4px 8px;
   }
+
+  &.warn {
+    color: #ffffff;
+    background-color: $color-red;
+  }
+  &.warn.text {
+    color: $color-red;
+    background-color: transparent;
+  }
+
+  &.jumbo {
+    padding: 12px 22px;
+    font-size: 18px;
+  }
+
+  &:disabled {
+    background: rgba(255,255,255,.3);
+    color: #ffffff;
+    cursor: default;
+  }
 }
 
 .flex-grow {
   flex-grow: 1;
+}
+.flex {
+  display: flex;
+  &.v-center {
+    align-items: center;
+  }
 }
 
 .link {

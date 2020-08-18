@@ -28,6 +28,7 @@
     "next-cookies": "^2.0.3",
     "react": "^16.13.1",
     "react-color": "^2.18.1",
+    "react-confirm-alert": "^2.6.1",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-draggable": "^4.4.3",
@@ -35,7 +36,8 @@
     "react-icons": "^3.10.0",
     "react-markdown": "^4.3.1",
     "react-tooltip": "^4.2.8",
-    "sass": "^1.26.10"
+    "sass": "^1.26.10",
+    "unique-names-generator": "^4.3.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.10.5",

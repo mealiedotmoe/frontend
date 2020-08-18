@@ -40,6 +40,12 @@ export class ImageCanvas extends React.Component<ImageCanvasProps> {
     this.drawCanvas();
   }
 
+  public componentDidUpdate(prevProps: ImageCanvasProps) {
+    if (prevProps.imageData.image !== this.props.imageData.image) {
+      this.drawCanvas();
+    }
+  }
+
   private getCanvasPointColor(x: number, y: number): string {
     if (!this.canvasRef.current) return '#000000';
     const context = this.canvasRef.current.getContext('2d');

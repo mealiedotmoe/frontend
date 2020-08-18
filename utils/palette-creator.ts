@@ -1,7 +1,10 @@
+export const CANVAS_HEIGHT = 360;
+export const CANVAS_WIDTH = 300;
+
 export function paletteCreator(roleColorMap: { [key: string]: string; }, username: string): HTMLCanvasElement {
   const canvas = document.createElement('canvas');
-  canvas.width = 300;
-  canvas.height = 360;
+  canvas.width = CANVAS_WIDTH;
+  canvas.height = CANVAS_HEIGHT;
 
   const ctx = canvas.getContext('2d');
   if (!ctx) return canvas;
@@ -28,13 +31,13 @@ export function paletteCreator(roleColorMap: { [key: string]: string; }, usernam
     ctx.fillStyle = roleColorMap[role];
     ctx.font = "700 20px Inter";
     ctx.fillText(role, 15, offset + (index + 1) * 30);
-    ctx.font = "700 20px monospace";
-    ctx.fillText(roleColorMap[role].toLocaleUpperCase(), 195, offset + (index + 1) * 30);
+    ctx.font = "500 20px monospace";
+    ctx.fillText(roleColorMap[role].toLocaleUpperCase(), 201, offset + (index + 1) * 30);
   });
 
   ctx.font = "400 10px Inter";
   ctx.fillStyle = "rgba(255,255,255,0.6)";
-  ctx.fillText(`Made by ${username}`, 219, 350);
+  ctx.fillText(`Made by ${username}`, 15, 350);
 
   return canvas;
 }

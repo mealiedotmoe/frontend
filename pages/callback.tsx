@@ -1,10 +1,11 @@
-import * as React from 'react';
-import Head from 'next/head';
-import { GetServerSidePropsContext, GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import cookies from "next-cookies";
 import jwt from 'jsonwebtoken';
+import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import cookies from 'next-cookies';
+import Head from 'next/head';
+import Router from 'next/router';
+import * as React from 'react';
+
 import { DecodedJWT } from '../utils/api-return-types';
-import Router from "next/router";
 
 class Callback extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public componentDidMount() {
@@ -14,6 +15,8 @@ class Callback extends React.Component<InferGetServerSidePropsType<typeof getSer
       window.localStorage.removeItem("callback-to");
       Router.push(backTo);
       return;
+    } else {
+      Router.push("/");
     }
     console.log("Oops...", backTo);
   }
@@ -26,12 +29,13 @@ class Callback extends React.Component<InferGetServerSidePropsType<typeof getSer
         justifyContent: "center",
         color: "#FFF",
         height: "100vh",
-        fontSize: 48
+        fontSize: 24
       }}>
         <Head>
           <title>Logging in: Mealie.Moe</title>
         </Head>
-        Hey there {this.props.username}&nbsp;
+        Hey there {this.props.username}!
+        <br />
         Finalizing a couple things, just a second...
       </main>
     );

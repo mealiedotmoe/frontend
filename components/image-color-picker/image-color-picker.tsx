@@ -1,8 +1,10 @@
+import { action, computed, observable } from 'mobx';
+import { observer } from 'mobx-react';
 import * as React from 'react';
 import Dropzone, { DropzoneState } from 'react-dropzone';
-import { observable, computed, action } from 'mobx';
-import { ImageCanvasData, ImageCanvas } from './image-canvas';
-import { observer } from 'mobx-react';
+import { MdContentCopy, MdImage } from 'react-icons/md';
+
+import { ImageCanvas, ImageCanvasData } from './image-canvas';
 
 export interface ImageColorPickerProps {
   onChange: (color: string) => any;
@@ -51,6 +53,15 @@ export class ImageColorPicker extends React.Component<ImageColorPickerProps> {
 
     imageReader.readAsDataURL(firstImage.slice())
   }
+
+  @action private openNewFile(): void {
+    this.canvasData = null;
+    this.imageLoaded = false;
+    // We use a set timeout here for a small duration here
+    // since after the action is propagated it takes a cycle 
+    // of render to happen before the input is mounted again.
+    setTimeout(() => this.inputContainerRef.current?.click(), 10);
+  }
   
   @computed private get renderContent(): React.ReactNode {
     if (this.imageLoaded && this.canvasData) {
@@ -69,7 +80,7 @@ export class ImageColorPicker extends React.Component<ImageColorPickerProps> {
               {this.currentColor}
             </div>
             &middot;
-            <button className="button text small">
+            <button className="button text small" onClick={() => this.openNewFile()}>
               Use a different image
             </button>
           </section>
@@ -84,7 +95,17 @@ export class ImageColorPicker extends React.Component<ImageColorPickerProps> {
             className: "dropzone-container"
           })} ref={this.inputContainerRef}>
             <input {...getInputProps()} />
-            Upload an image
+            <section className="hint-options">
+              <section className="hint">
+                <MdImage className="image-icon" />
+                Upload an image
+              </section>
+              <span className="middle-text">OR</span>
+              <section className="hint">
+                <MdContentCopy className="image-icon" />
+                Drag n' drop
+              </section>
+            </section>
           </section>
         )}
       </Dropzone>

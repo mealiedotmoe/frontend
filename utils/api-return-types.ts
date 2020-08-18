@@ -52,3 +52,21 @@ export interface InfoPage {
   created_at: string;
   updated_at: string;
 }
+
+export interface Palette {
+  [key: string]: string|number;
+  "id": number,
+  "user_id": string,
+  "name": string,
+  "clover": string,
+  "member": string,
+  "active": string,
+  "regular": string,
+  "contributor": string,
+  "addicted": string,
+  "insomniac": string,
+  "nolifer": string,
+  "birthday": string,
+  "created_at": string,
+  "updated_at": string;
+}
