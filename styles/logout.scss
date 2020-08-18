@@ -1,0 +1,5 @@
+@import "./login-redirect.scss";
+
+.logout-container {
+  @extend .login-redirect;
+}

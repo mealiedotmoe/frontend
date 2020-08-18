@@ -30,13 +30,13 @@ class LandingPage extends React.Component<{}> {
         </main>
         <aside className="links">
           <section className="psudeo-links">
-            <a href="/rules" className="nav-link">
+            <a href="/pages/server-info" className="nav-link">
               <RulerIcon className="icon rules" /> Rules
             </a>
             <a href="/palette" className="nav-link">
               <PaletteIcon className="icon palette" /> Color Palette
             </a>
-            <a href="/map" className="nav-link">
+            <a href="/server-map" className="nav-link">
               <MapIcon className="icon map" /> Server Map
             </a>
             <a href="https://danbo.space" target="__blank" className="nav-link">

@@ -19,6 +19,7 @@ import "../components/saved-palette/saved-palettes.scss";
 import "../styles/login-redirect.scss";
 import "../styles/custom-react-confirm.scss";
 import "../styles/server-map.scss";
+import "../styles/logout.scss";
 
 export default function MyApp({ Component, pageProps }: { Component: any; pageProps: any; }) {
   return (

@@ -1,9 +1,13 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { PageTitle } from '../components/page-title/page-title';
+import Head from 'next/head';
 
 const NotFoundPage: React.FunctionComponent<{}> = ({ }): JSX.Element => (
   <main className="not-found-page">
+    <Head>
+      <title>Not found 404: Mealie.Moe</title>
+    </Head>
     <article className="links">
       <PageTitle title="404 - Not Found" className="title" />
       <p>
