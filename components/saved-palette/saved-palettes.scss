@@ -38,11 +38,17 @@
 
         .palette-color {
           flex-grow: 1;
+          cursor: pointer;
+          transition: 25ms all ease;
+
+          &:hover {
+            border: 2px solid #ffffff !important;
+          }
 
           &:first-child {
             border-top-left-radius: 5px;
           }
-          &:last-child {
+          &:nth-last-child(2) {
             border-top-right-radius: 5px;
           }
         }

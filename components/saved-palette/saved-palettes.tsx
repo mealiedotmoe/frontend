@@ -10,6 +10,7 @@ import { PaletteCard } from './palette-card';
 
 export interface SavedPaletteProps {
   onChange: (palette: Palette) => any;
+  onColorPick?: (color: string) => any;
 }
 
 @observer
@@ -76,6 +77,7 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
                   onUse={this.props.onChange}
                   onDelete={(palette) => this.confirmPaletteDelete(palette)}
                   key={palette.id}
+                  onColorPick={this.props.onColorPick}
                 />
               ))}
             </section>

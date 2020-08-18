@@ -114,11 +114,25 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
   @computed private get renderPickerComponent(): React.ReactNode {
     switch (this.picker) {
       case 'image':
-        return <ImageColorPicker onChange={color => this.changeSelectedColor(color)} />;
+        return (
+          <ImageColorPicker
+            onChange={color => this.changeSelectedColor(color)}
+          />
+        );
       case 'palette':
-        return <ColorPicker color={this.roleColorMap[this.selectedRole]} onChange={(color) => this.changeSelectedColor(color.hex)} />;
+        return (
+          <ColorPicker
+            color={this.roleColorMap[this.selectedRole]}
+            onChange={(color) => this.changeSelectedColor(color.hex)}
+          />
+        );
       case 'saved':
-        return <SavedPalettes onChange={(palette: APIPalette) => this.initPaletteFromSaved(palette)} />;
+        return (
+          <SavedPalettes
+            onChange={(palette: APIPalette) => this.initPaletteFromSaved(palette)}
+            onColorPick={(color: string) => this.changeSelectedColor(color)}
+          />
+        );
     }
   }
   
