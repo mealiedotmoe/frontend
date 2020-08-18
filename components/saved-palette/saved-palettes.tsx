@@ -54,12 +54,12 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
   public render() {
     return (
       <section className="saved-palettes">
-        {!this.loaded && (
+        {!this.loaded && !this.notLoggedIn && (
           <section className="loading-hint">
             Loading palettes...
           </section>
         )}
-        {this.loaded && this.palettes.length === 0 && (
+        {this.loaded && !this.notLoggedIn && this.palettes.length === 0 && (
           <section className="loading-hint">
             No palettes saved yet
           </section>

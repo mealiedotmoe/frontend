@@ -15,7 +15,12 @@ export default class LoginRedirect extends React.Component<{}> {
 
   private goBack(): void {
     clearTimeout(this.timeout);
-    window.location.pathname = window.localStorage.get("callback-to");
+    window.location.pathname = window.localStorage.getItem("callback-to") as string;
+  }
+
+  private redirect(): void {
+    clearTimeout(this.timeout);
+    window.location.href = `${API_BASE}/auth/login`;
   }
 
   public render() {
@@ -27,6 +32,10 @@ export default class LoginRedirect extends React.Component<{}> {
           <br />
           <button className="button jumbo" onClick={() => this.goBack()}>
             Go back
+          </button>
+          &nbsp;
+          <button className="button jumbo" onClick={() => this.redirect()}>
+            Just take me there
           </button>
         </section>
       </main>
