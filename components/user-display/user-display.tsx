@@ -9,8 +9,12 @@ export class UserDisplay extends React.Component<{ className?: string; user: str
   @observable private user: string = "loading...";
 
   @action private async getUserData(): Promise<void> {
-    const result = await apiFetch<User>(`/user/${this.props.user}`, "GET");
-    this.user = result.username;
+    try {
+      const result = await apiFetch<User>(`/user/${this.props.user}`, "GET");
+      this.user = result.username;
+    } catch (e) {
+      this.user = "Unknown";
+    }
   }
 
   public componentDidMount() {

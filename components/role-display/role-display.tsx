@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { HSLColor } from 'react-color';
 
 export interface RoleDisplayProps {
   role: string;

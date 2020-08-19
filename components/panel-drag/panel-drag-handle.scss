@@ -1,0 +1,36 @@
+.panel-drag-handle-container {
+  display: none;
+  visibility: hidden;
+  touch-action: none;
+  user-select: none;
+
+  .panel-drag-handle {
+    display: none;
+    visibility: hidden;
+    touch-action: none;
+    user-select: none;
+  }
+}
+
+@media (max-width:961px) {
+  .panel-drag-handle-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    visibility: visible;
+    padding: 15px 0;
+    color: rgba(255,255,255,.6);
+    font-size: 11px;
+
+    .panel-drag-handle {
+      display: block;
+      visibility: visible;
+      height: 5px;
+      width: 15vw;
+      border-radius: 3px;
+      background: #ffffff;
+      margin-bottom: 5px;
+    }
+  }
+}

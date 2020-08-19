@@ -33,3 +33,35 @@
     }
   }
 }
+
+@media (max-width:961px) {
+  .navigator {
+    display: flex;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: calc(100vw - 24px);
+    height: 50px;
+    border-radius: 0;
+    align-items: center;
+    padding: 0 12px;
+
+    .link {
+      border-bottom: none;
+      color: rgba(255,255,255,.5);
+      line-height: 1;
+      flex-grow: 1;
+      width: calc(100% / 6);
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      font-size: 9px;
+
+      .icon {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

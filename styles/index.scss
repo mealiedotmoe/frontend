@@ -1,6 +1,6 @@
 @import "./root.scss";
 
-.container {
+.index-container {
   display: grid;
   grid-template-columns: 8fr 5fr;
 
@@ -90,6 +90,39 @@
           color: #C10000;
         }
       }
+    }
+  }
+}
+
+@media (max-width:961px) {
+  .index-container {
+    grid-template-columns: 1fr;
+
+    .hero {
+      width: 90vw;
+      padding-left: 10vw;
+      padding-top: 15vh;
+      height: 85vh;
+      justify-content: flex-start;
+
+      .title {
+        font-size: 48px;
+      }
+      .subtitle {
+        width: 90%;
+      }
+    }
+
+    .links {
+      position: fixed;
+      top: 50vh;
+      left: 0;
+      height: 99vh;
+      padding-top: 1vh;
+      background: $background-primary;
+      width: 100vw;
+      border-radius: 22px 22px 0 0;
+      justify-content: flex-start;
     }
   }
 }

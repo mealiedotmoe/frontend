@@ -34,3 +34,24 @@
     }
   }
 }
+
+@media (max-width:961px) {
+  .page-view-container, .pages-container {
+    .content-container {
+      width: calc(95vw - 32px);
+      margin-left: 2.5vw;
+      margin-top: 10vh;
+      margin-bottom: 20vh;
+      border-radius: 5px;
+      padding: 18px 16px;
+
+      .markdown-content {
+        margin-bottom: 2vh;
+
+        ul {
+          margin-left: -10px;
+        }
+      }
+    }
+  }
+}

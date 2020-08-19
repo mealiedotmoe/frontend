@@ -12,6 +12,7 @@ import Markdown from "react-markdown";
 import Color from 'color';
 import cookies from "next-cookies";
 import jwt from "jsonwebtoken";
+import { DraggablePanel } from '../../components/panel-drag/draggable-panel';
 
 class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public get renderFAQCards(): React.ReactNode {
@@ -43,11 +44,13 @@ class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getS
         <Head>
           <title>FAQ - {this.props.faqContent.tag}: Mealie.Moe</title>
         </Head>
-        <aside className="faq-card-list">
-          <Scrollbars universal>
-            {this.renderFAQCards}
-          </Scrollbars>
-        </aside>
+        <DraggablePanel className="faq-card-list">
+          <section className="scroll-container">
+            <Scrollbars universal>
+              {this.renderFAQCards}
+            </Scrollbars>
+          </section>
+        </DraggablePanel>
         <main className="faq-card-content">
           <PageTitle title={`${this.props.faqContent.title} - FAQ`} />
           <section className="tags-container">
@@ -85,6 +88,7 @@ export const getServerSideProps: GetServerSideProps<{
   isAdmin: boolean;
 }> = async (context: GetServerSidePropsContext) => {
   const token = cookies(context)['session-jwt'];
+  console.log("fuck", token);
   const faqs = await apiFetch<Array<IFAQ>>("/faq", "GET");
   const faqContent = await apiFetch<ISpecificFAQ>(`/faq/${context.params?.id}`, "GET");
   if (!token) {

@@ -10,6 +10,7 @@ import { GetServerSidePropsContext, GetServerSideProps, InferGetServerSidePropsT
 import Scrollbars from "react-custom-scrollbars";
 import Link from 'next/link';
 import cookies from 'next-cookies';
+import { DraggablePanel } from '../../components/panel-drag/draggable-panel';
 
 @observer
 class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -47,11 +48,11 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
         <Head>
           <title>FAQ: Mealie.Moe</title>
         </Head>
-        <aside className="faq-card-list">
+        <DraggablePanel className="faq-card-list">
           <Scrollbars universal>
             {this.renderFAQCards}
           </Scrollbars>
-        </aside>
+        </DraggablePanel>
         <main className="faq-card-content">
           <PageTitle title="Frequently Asked Questions" />
           {this.renderCardContent}

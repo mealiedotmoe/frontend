@@ -4,11 +4,12 @@ import { FaRuler as RulerIcon } from "react-icons/fa";
 import { GiPalette as PaletteIcon, GiTreasureMap as MapIcon, GiRibbonMedal as MedalIcon } from "react-icons/gi";
 import { AiOutlineQuestion as QuestionIcon } from "react-icons/ai";
 import { MdOpenInNew as ExternalLinkIcon } from "react-icons/md";
+import { DraggablePanel } from '../components/panel-drag/draggable-panel';
 
 class LandingPage extends React.Component<{}> {
   public render() {
     return (
-      <section className="container">
+      <section className="index-container">
         <Head>
           <title>Landing: Mealie.Moe</title>
         </Head>
@@ -28,7 +29,7 @@ class LandingPage extends React.Component<{}> {
             Photo by Paweł Czerwiński on Unsplash
           </span>
         </main>
-        <aside className="links">
+        <DraggablePanel className="links" noBottomNav>
           <section className="psudeo-links">
             <a href="/pages/server-info" className="nav-link">
               <RulerIcon className="icon rules" /> Rules
@@ -46,7 +47,7 @@ class LandingPage extends React.Component<{}> {
               <QuestionIcon className="icon faq" /> Frequently Asked Questions
             </a>
           </section>
-        </aside>
+        </DraggablePanel>
       </section>
     );
   }
