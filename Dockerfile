@@ -1,6 +1,6 @@
 # node alpine 14.8
-# https://hub.docker.com/layers/node/library/node/14.8.0-alpine3.11/images/sha256-ddc9f793f04c8c6750e9126637a944b351ce676680b1c78348f4a67dd9f605a5?context=explore
-FROM node@sha256:ddc9f793f04c8c6750e9126637a944b351ce676680b1c78348f4a67dd9f605a5
+# https://hub.docker.com/layers/node/library/node/14.8.0-alpine3.11/images/sha256-95562acd0ed9398e21babe6b90fd8ac3974709c9338155e2b4ef1c0824e60be1?context=explore
+FROM node@sha256:95562acd0ed9398e21babe6b90fd8ac3974709c9338155e2b4ef1c0824e60be1
 
 # Install git + SSL ca certificates.
 # Git is required for fetching the dependencies.
