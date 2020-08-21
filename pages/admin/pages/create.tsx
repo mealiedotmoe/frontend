@@ -15,12 +15,12 @@ import { Navigator } from '../../../components/navigator/navigator';
 
 @observer
 class Pages extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
-  @observable private renderMarkdownPreview: boolean = false;
-  @observable private content: string = "";
-  @observable private title: string = "";
-  @observable private slug: string = "";
+  @observable private renderMarkdownPreview = false;
+  @observable private content = "";
+  @observable private title = "";
+  @observable private slug = "";
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     if (!this.props.isAdmin) {
       redirectToLogin();
       return;
@@ -52,7 +52,7 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
     window.location.pathname = `/pages/${response.slug}`;
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <main className="pages-admin">
         <Head>
@@ -110,7 +110,7 @@ export default Pages;export const getServerSideProps: GetServerSideProps<{
 }> = async (context: GetServerSidePropsContext) => {
   const sessionToken = cookies(context)["session-jwt"] ?? null;
   if (sessionToken) {
-    const { isAdmin, username, sub } = jwt.decode(sessionToken) as DecodedJWT;
+    const { isAdmin } = jwt.decode(sessionToken) as DecodedJWT;
     return {
       props: {
         isAdmin,

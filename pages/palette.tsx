@@ -20,21 +20,23 @@ import { Palette as APIPalette, User } from '../utils/api-return-types';
 import { redirectToLogin } from '../utils/login';
 import { paletteCreator } from '../utils/palette-creator';
 import { ROLES } from '../utils/roles';
+import { DraggablePanel } from '../components/panel-drag/draggable-panel';
 
 @observer
 class Palette extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   @observable private picker: "image" | "palette" | "saved" = "palette";
   @observable private roleColorMap: { [key: string]: string; } = {};
-  @observable private selectedRole: string = "Clover";
-  @observable private displayText: string = "Sample";
+  @observable private selectedRole = "Clover";
+  @observable private displayText = "Sample";
   @observable private generatedPaletteImageSrc?: string;
   @observable private paletteName: string = uniqueNamesGenerator({ dictionaries: [colors, animals], length: 2, separator: " ", style: "capital" });
-  @observable private saved: boolean = false;
+  @observable private saved = false;
 
   public constructor(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
     super(props);
     ROLES.forEach(role => this.roleColorMap[role] = '#428AE9');
   } 
+  
   
   @action private changeSelectedColor(color: string): void {
     this.roleColorMap[this.selectedRole] = color;
@@ -60,7 +62,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
   private async savePaletteToAPI(ev: React.FormEvent): Promise<void> {
     ev.preventDefault();
     if (!this.props.loggedIn) redirectToLogin();
-    const result = await apiFetch<APIPalette>("/palette/me", "POST", {
+    await apiFetch<APIPalette>("/palette/me", "POST", {
       clover: this.roleColorMap["Clover"],
       member: this.roleColorMap["Member"],
       active: this.roleColorMap["Active"],
@@ -136,27 +138,29 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
     }
   }
   
-  public render() {
+  public render(): React.ReactNode {
     return (
       <section className="picker-container">
         <Head>
           <title>Color Palette: Mealie.Moe</title>
         </Head>
-        <aside className="color-picker-container">
-          {this.renderPickerComponent}
-          <section className="actions">
-            <button className="button text" onClick={() => this.picker = this.picker === "image" ? "palette" : "image"}>
-              Use {this.picker === "image" ? "color picker" : "an image"} instead
-            </button>
-            <button className="button text" onClick={() => this.picker = this.picker === "saved" ? "palette" : "saved"}>
-              {this.picker === "saved" ? (
-                "Back to color picker"
-              ) : (
-                "View saved palettes"
-              )}
-            </button>
-          </section>
-        </aside>
+        <DraggablePanel className="color-picker-container">
+          <>
+            {this.renderPickerComponent}
+            <section className="actions">
+              <button className="button text" onClick={() => this.picker = this.picker === "image" ? "palette" : "image"}>
+                Use {this.picker === "image" ? "color picker" : "an image"} instead
+              </button>
+              <button className="button text" onClick={() => this.picker = this.picker === "saved" ? "palette" : "saved"}>
+                {this.picker === "saved" ? (
+                  "Back to color picker"
+                ) : (
+                  "View saved palettes"
+                )}
+              </button>
+            </section>
+          </>
+        </DraggablePanel>
         <main className="content">
           <PageTitle title="Color Palette" />
           <section className="roles-display">

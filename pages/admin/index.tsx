@@ -9,14 +9,14 @@ import Link from 'next/link';
 import { MdAccountCircle, MdSchool, MdPages } from "react-icons/md";
 
 class AdminHome extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
-  public componentDidMount() {
+  public componentDidMount(): void {
     if (!this.props.isAdmin) {
       redirectToLogin();
-      return null;
+      return;
     }
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <main className="admin-home">
         <Head>

@@ -19,7 +19,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
     if (faqs.length === 0) {
       return (
         <section className="loading-alert">
-          Looks like we don't have any FAQs written yet ^_^"
+          Looks like we don&apos;t have any FAQs written yet ^_^&quot;
         </section>
       );
     }
@@ -42,7 +42,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
     );
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <section className="faq-container">
         <Head>

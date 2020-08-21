@@ -6,10 +6,10 @@ import { rgbToHex } from '../../utils/rgb-to-hex';
 
 export interface ImageCanvasProps {
   imageData: ImageCanvasData;
-  onHover?: (color: string) => any;
-  onChange?: (color: string) => any;
+  onHover?: (color: string) => unknown;
+  onChange?: (color: string) => unknown;
   className?: string;
-};
+}
 
 export interface ImageCanvasData {
   image: HTMLImageElement;
@@ -40,7 +40,7 @@ export class ImageCanvas extends React.Component<ImageCanvasProps> {
     this.drawCanvas();
   }
 
-  public componentDidUpdate(prevProps: ImageCanvasProps) {
+  public componentDidUpdate(prevProps: ImageCanvasProps): void {
     if (prevProps.imageData.image !== this.props.imageData.image) {
       this.drawCanvas();
     }
@@ -75,7 +75,7 @@ export class ImageCanvas extends React.Component<ImageCanvasProps> {
     if(this.props.onChange) this.props.onChange(color);
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <section className={this.props.className}>
         <canvas

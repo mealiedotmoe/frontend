@@ -1,6 +1,6 @@
 export const API_BASE = process.env.NEXT_PUBLIC_API_HOST;
 
-export async function apiFetch<T>(uri: string, method: "GET" | "PUT" | "POST" | "DELETE", data?: any): Promise<T> {
+export async function apiFetch<T>(uri: string, method: "GET" | "PUT" | "POST" | "DELETE", data?: Record<string, unknown>): Promise<T> {
   const httpOptions: RequestInit = {
     method,
     headers: {},

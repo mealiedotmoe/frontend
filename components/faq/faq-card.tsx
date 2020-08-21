@@ -6,7 +6,7 @@ export interface FAQCardProps extends IFAQ {
   selected?: boolean;
 }
 
-export const FAQCard: React.FunctionComponent<FAQCardProps & { createNew?: boolean; }> = (props): JSX.Element => {
+export const FAQCard: React.FunctionComponent<FAQCardProps & { createNew?: boolean; }> = (props: FAQCardProps & { createNew?: boolean; }): JSX.Element => {
   if (props.createNew) {
     return (
       <section className="faq-card create">

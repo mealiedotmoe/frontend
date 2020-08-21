@@ -1,14 +1,10 @@
 import * as React from 'react';
-import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 import { Hue, EditableInput, Saturation } from 'react-color/lib/components/common';
-import { HSLColor, CustomPicker, CustomPickerProps } from "react-color";
+import { CustomPicker, CustomPickerProps } from "react-color";
 import Color from 'color';
 
-export interface ColorPickerProps {
-}
-
-const PointerComponent: React.FunctionComponent<any> = (): JSX.Element => (
+const PointerComponent: React.FunctionComponent<Record<string, unknown>> = (): JSX.Element => (
   <div className="slider-handle" />
 );
 

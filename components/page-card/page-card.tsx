@@ -4,7 +4,12 @@ import Link from 'next/link';
 import ReactTooltip from 'react-tooltip';
 import { UserDisplay } from '../user-display/user-display';
 
-export const PageCard: React.FunctionComponent<{ page: InfoPage; admin?: boolean; }> = ({ page, admin }): JSX.Element => (
+export interface PageCardProps {
+  page: InfoPage;
+  admin?: boolean;
+}
+
+export const PageCard: React.FunctionComponent<PageCardProps> = ({ page, admin }: PageCardProps): JSX.Element => (
   <Link href={`${admin ? "/admin/" : ""}pages/${admin ? "edit/" : ""}${page.slug}`}>
     <a>
       <article className="page-card">

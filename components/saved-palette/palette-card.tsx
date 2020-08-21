@@ -6,12 +6,12 @@ import ReactTooltip from 'react-tooltip';
 
 export interface PaletteCardProps {
   palette: Palette;
-  onUse: (palette: Palette) => any;
-  onDelete: (palette: Palette) => any;
-  onColorPick?: (color: string) => any;
+  onUse: (palette: Palette) => unknown;
+  onDelete: (palette: Palette) => unknown;
+  onColorPick?: (color: string) => unknown;
 }
 
-export const PaletteCard: React.FunctionComponent<PaletteCardProps> = ({ palette, onUse, onDelete, onColorPick }): JSX.Element => (
+export const PaletteCard: React.FunctionComponent<PaletteCardProps> = ({ palette, onUse, onDelete, onColorPick }: PaletteCardProps): JSX.Element => (
   <section className="palette-card">
     <section className="palette">
       {Object.keys(palette).filter(key => (

@@ -6,7 +6,7 @@ import { User } from '../../utils/api-return-types';
 
 @observer
 export class UserDisplay extends React.Component<{ className?: string; user: string; append?: string; }> {
-  @observable private user: string = "loading...";
+  @observable private user = "loading...";
 
   @action private async getUserData(): Promise<void> {
     try {
@@ -17,11 +17,11 @@ export class UserDisplay extends React.Component<{ className?: string; user: str
     }
   }
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     this.getUserData();
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <span className={this.props.className}>
         {this.props.append}{this.user}

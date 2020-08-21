@@ -5,7 +5,7 @@ export interface AlertProps {
   message: string;
 }
 
-export const Alert: React.FunctionComponent<AlertProps> = ({ message }): JSX.Element => (
+export const Alert: React.FunctionComponent<AlertProps> = ({ message }: AlertProps): JSX.Element => (
   <section className="alert">
     <MdWarning className="icon" />
     <section className="content">

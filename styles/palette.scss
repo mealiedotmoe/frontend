@@ -67,6 +67,7 @@
 
         &.input-header {
           justify-content: flex-end;
+
           .text-field {
             margin-left: 16px;
           }
@@ -149,5 +150,39 @@
   }
   to {
     bottom: 0;
+  }
+}
+
+@media (max-width:961px) {
+  .picker-container {
+    grid-template-columns: auto;
+
+    .color-picker-container {
+      position: fixed;
+      background: #101015;
+      top: 60vh;
+      width: 100vw;
+
+      .actions {
+        display: none;
+        visibility: hidden;
+      }
+    }
+    .content {
+      padding: 16px 8px;
+
+      .roles-display {
+        grid-template-columns: 1fr;
+      }
+      .col-header {
+        &.input-header {
+          justify-content: flex-start;
+
+          .text-field {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
   }
 }

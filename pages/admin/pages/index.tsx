@@ -9,7 +9,7 @@ import { Navigator } from '../../../components/navigator/navigator';
 import Head from 'next/head';
 
 class Pages extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
-  public render() {
+  public render(): React.ReactNode {
     return (
       <main className="pages-container">
         <Head>

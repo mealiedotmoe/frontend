@@ -3,7 +3,7 @@ import { Navigator } from '../components/navigator/navigator';
 import { PageTitle } from '../components/page-title/page-title';
 import Head from 'next/head';
 
- const MarkdownGuide: React.FunctionComponent<{}> = (): JSX.Element => (
+ const MarkdownGuide: React.FunctionComponent<Record<string, unknown>> = (): JSX.Element => (
    <main className="markdown-guide-container">
     <Head>
       <title>Markdown Guide: Mealie.Moe</title>

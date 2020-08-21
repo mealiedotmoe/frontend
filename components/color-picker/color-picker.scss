@@ -103,3 +103,11 @@
     outline: none;
   }
 }
+
+@media (max-width:961px) {
+  .color-picker {
+    height: calc(80vh - 51px);
+
+    .picker-body {}
+  }
+}

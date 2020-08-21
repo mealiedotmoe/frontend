@@ -41,7 +41,7 @@ export interface DecodedJWT {
   isAdmin: boolean;
   sub: string;
   username: string;
-};
+}
 
 export interface InfoPage {
   title: string;

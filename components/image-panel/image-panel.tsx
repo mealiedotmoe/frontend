@@ -4,15 +4,15 @@ import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../utils/palette-creator';
 
 export interface ImagePanelProps {
   paletteImageSrc: string;
-  onClose: () => any;
-  onSave: (ev: React.FormEvent) => any;
+  onClose: () => unknown;
+  onSave: (ev: React.FormEvent) => unknown;
   saved?: boolean;
   loggedIn?: boolean;
   paletteName: string;
-  onPaletteNameChange: (ev: React.ChangeEvent<HTMLInputElement>) => any;
+  onPaletteNameChange: (ev: React.ChangeEvent<HTMLInputElement>) => unknown;
 }
 
-export const ImagePanel: React.FunctionComponent<ImagePanelProps> = (props): JSX.Element => (
+export const ImagePanel: React.FunctionComponent<ImagePanelProps> = (props: ImagePanelProps): JSX.Element => (
   <section className="backdrop" onClick={props.onClose}>
     <aside className="image-panel" onClick={ev => ev.stopPropagation()}>
       <img src={props.paletteImageSrc} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} />

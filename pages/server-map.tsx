@@ -5,7 +5,7 @@ import { Navigator } from '../components/navigator/navigator';
 import Head from 'next/head';
 
 export default class ServerMap extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
-  public render() {
+  public render(): React.ReactNode {
     return (
       <section className="server-map-container">
         <Head>

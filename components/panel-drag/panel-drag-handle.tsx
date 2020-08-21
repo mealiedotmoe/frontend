@@ -2,14 +2,14 @@ import * as React from 'react';
 import interact from 'interactjs';
 
 export interface PanelDragHandleProps {
-  onPositionChange?: (x: number, y: number) => any;
-  getSelfPosition?: (rect: DOMRect) => any;
+  onPositionChange?: (x: number, y: number) => unknown;
+  getSelfPosition?: (rect: DOMRect) => unknown;
 }
 
 export class PanelDragHandle extends React.Component<PanelDragHandleProps> {
   private handleRef = React.createRef<HTMLDivElement>();
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     if (!this.handleRef.current) return;
     this.props.getSelfPosition && this.props.getSelfPosition(this.handleRef.current.getBoundingClientRect());
 
@@ -25,7 +25,7 @@ export class PanelDragHandle extends React.Component<PanelDragHandleProps> {
       });
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <div className="panel-drag-handle-container" ref={this.handleRef}>
         <div className="panel-drag-handle" />

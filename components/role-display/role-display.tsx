@@ -3,13 +3,13 @@ import * as React from 'react';
 export interface RoleDisplayProps {
   role: string;
   color: string;
-  onClick?: () => any;
+  onClick?: () => unknown;
   className?: string;
   displayText: string;
 }
 
 export class RoleDisplay extends React.Component<RoleDisplayProps> {
-  public render() {
+  public render(): React.ReactNode {
     return (
       <section
         className={`role-display ${this.props.className}`}

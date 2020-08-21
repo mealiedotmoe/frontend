@@ -20,18 +20,18 @@ import ReactMarkdown from 'react-markdown';
 
 @observer
 class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
-  @observable private color: string = "#ffffff";
-  @observable private tag: string = "FAQ Tag";
-  @observable private displayColorPicker: boolean = false;
-  @observable private title: string = "";
-  @observable private content: string = "";
+  @observable private color = "#ffffff";
+  @observable private tag = "FAQ Tag";
+  @observable private displayColorPicker = false;
+  @observable private title = "";
+  @observable private content = "";
   @observable private error?: string;
-  @observable private renderContentPreview: boolean = false;
+  @observable private renderContentPreview = false;
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     if (!this.props.isAdmin) {
       redirectToLogin();
-      return null;
+      return;
     }
   }
 
@@ -99,7 +99,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
     );
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <main className="faq-admin-container">
         <Head>
@@ -128,7 +128,6 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
             <div
               className="faq-tag"
               style={{ background: this.color, color: Color(this.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
-              onClick={() => {}}
             >
               <input className="tag-input" value={this.tag} onChange={ev => this.tag = ev.target.value} />
             </div>
@@ -165,7 +164,7 @@ export const getServerSideProps: GetServerSideProps<{
   const results = await apiFetch<Array<IFAQ>>("/faq", "GET");
   const sessionToken = cookies(context)["session-jwt"] ?? null;
   if (sessionToken) {
-    const { isAdmin, username, sub } = jwt.decode(sessionToken) as DecodedJWT;
+    const { isAdmin } = jwt.decode(sessionToken) as DecodedJWT;
     return {
       props: {
         isAdmin,

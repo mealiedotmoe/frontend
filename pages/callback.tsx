@@ -8,7 +8,7 @@ import * as React from 'react';
 import { DecodedJWT } from '../utils/api-return-types';
 
 class Callback extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
-  public componentDidMount() {
+  public componentDidMount(): void {
     const backTo = window.localStorage.getItem("callback-to");
     if (backTo) {
       // Clear the state
@@ -21,7 +21,7 @@ class Callback extends React.Component<InferGetServerSidePropsType<typeof getSer
     console.log("Oops...", backTo);
   }
   
-  public render() {
+  public render(): React.ReactNode {
     return (
       <main style={{
         display: "flex",

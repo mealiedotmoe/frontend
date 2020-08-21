@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { FAQCard } from '../../../../components/faq/faq-card';
 import Color from 'color';
 import { observer } from 'mobx-react';
-import { observable, computed, action } from 'mobx';
+import { observable, computed } from 'mobx';
 import { ChromePicker } from "react-color";
 import Head from 'next/head';
 import Router from 'next/router';
@@ -23,12 +23,12 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
     content: ""
   };
   @observable private textAreaRef: React.RefObject<HTMLTextAreaElement> = React.createRef<HTMLTextAreaElement>();
-  @observable private tag: string = "";
-  @observable private color: string = "#FFFFFF";
-  @observable private displayColorPicker: boolean = false;
-  @observable private displayRenderContent: boolean = false;
+  @observable private tag = "";
+  @observable private color = "#FFFFFF";
+  @observable private displayColorPicker = false;
+  @observable private displayRenderContent = false;
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     if (!this.props.isAdmin) {
       redirectToLogin();
       return null;
@@ -94,7 +94,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
     Router.push(`/faq/${response.id}`);
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <main className="faq-admin-container">
         <Head>
@@ -160,7 +160,7 @@ export const getServerSideProps: GetServerSideProps<{
   const currentFAQ = await apiFetch<ISpecificFAQ>(`/faq/${faqID}`, "GET");
 
   if (sessionToken) {
-    const { isAdmin, username, sub } = jwt.decode(sessionToken) as DecodedJWT;
+    const { isAdmin } = jwt.decode(sessionToken) as DecodedJWT;
     return {
       props: {
         isAdmin,

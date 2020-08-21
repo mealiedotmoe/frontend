@@ -6,8 +6,8 @@ import { AiOutlineQuestion as QuestionIcon } from "react-icons/ai";
 import { MdOpenInNew as ExternalLinkIcon } from "react-icons/md";
 import { DraggablePanel } from '../components/panel-drag/draggable-panel';
 
-class LandingPage extends React.Component<{}> {
-  public render() {
+class LandingPage extends React.Component<Record<string, unknown>> {
+  public render(): React.ReactNode {
     return (
       <section className="index-container">
         <Head>

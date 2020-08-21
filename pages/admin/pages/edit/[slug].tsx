@@ -15,11 +15,11 @@ import { observer } from 'mobx-react';
 
 @observer
 class Pages extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
-  @observable private renderMarkdownPreview: boolean = false;
-  @observable private content: string = "";
-  @observable private title: string = "";
+  @observable private renderMarkdownPreview = false;
+  @observable private content = "";
+  @observable private title = "";
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     if (!this.props.isAdmin) {
       redirectToLogin();
       return;
@@ -51,7 +51,7 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
     window.location.pathname = `/pages/${result.slug}`;
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <main className="pages-admin">
         <Head>

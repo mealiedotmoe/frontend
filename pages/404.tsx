@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PageTitle } from '../components/page-title/page-title';
 import Head from 'next/head';
 
-const NotFoundPage: React.FunctionComponent<{}> = ({ }): JSX.Element => (
+const NotFoundPage: React.FunctionComponent<Record<string, unknown>> = ({ }): JSX.Element => (
   <main className="not-found-page">
     <Head>
       <title>Not found 404: Mealie.Moe</title>
@@ -11,8 +11,8 @@ const NotFoundPage: React.FunctionComponent<{}> = ({ }): JSX.Element => (
     <article className="links">
       <PageTitle title="404 - Not Found" className="title" />
       <p>
-        Looks like you have stumbled into a place which doesn't exist.
-        Here's a list of places you can go to instead:
+        Looks like you have stumbled into a place which doesn&apos;t exist.
+        Here&apos;s a list of places you can go to instead:
       </p>
       <ul>
         <li>
@@ -36,7 +36,7 @@ const NotFoundPage: React.FunctionComponent<{}> = ({ }): JSX.Element => (
           </Link>
         </li>
         <li>
-          <a rel="nofollow noopener" target="_blank" href="https://www.danbo.space/leaderboards/148606162810568704">Leaderboards</a>
+          <a rel="nofollow noopener noreferrer" target="_blank" href="https://www.danbo.space/leaderboards/148606162810568704">Leaderboards</a>
         </li>
       </ul>
     </article>

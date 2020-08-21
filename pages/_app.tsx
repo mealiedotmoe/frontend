@@ -23,8 +23,10 @@ import '../styles/palette.scss';
 import '../styles/server-map.scss';
 
 import Head from 'next/head';
+import * as React from 'react';
+import { AppProps } from 'next/app';
 
-export default function MyApp({ Component, pageProps }: { Component: any; pageProps: any; }) {
+export default function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
   return (
     <>
       <Head>

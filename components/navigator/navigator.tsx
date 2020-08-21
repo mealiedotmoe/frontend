@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { MdOpenInNew, MdAccountCircle, MdSchool, MdPages, MdDashboard, MdExitToApp } from "react-icons/md";
 import Link from "next/link";
-import { FaRuler as RulerIcon } from "react-icons/fa";
 import { GiPalette as PaletteIcon, GiTreasureMap as MapIcon, GiRibbonMedal as MedalIcon } from "react-icons/gi";
 import { AiOutlineQuestion as QuestionIcon } from "react-icons/ai";
 import { redirectToLogin } from '../../utils/login';
@@ -45,7 +44,7 @@ function conditionalRender(loggedIn: boolean, isMobile: boolean): React.ReactNod
   );
 }
 
-export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, loggedIn, centered }): JSX.Element => {
+export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, loggedIn, centered }: NavigatorProps): JSX.Element => {
   const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
   const [isMobile, setIsMobile] = React.useState<boolean>(false);
 

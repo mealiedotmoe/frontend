@@ -9,15 +9,15 @@ import { redirectToLogin } from '../../utils/login';
 import { PaletteCard } from './palette-card';
 
 export interface SavedPaletteProps {
-  onChange: (palette: Palette) => any;
-  onColorPick?: (color: string) => any;
+  onChange: (palette: Palette) => unknown;
+  onColorPick?: (color: string) => unknown;
 }
 
 @observer
 export class SavedPalettes extends React.Component<SavedPaletteProps> {
-  @observable private loaded: boolean = false;
+  @observable private loaded = false;
   @observable private palettes: Array<Palette> = [];
-  @observable private notLoggedIn: boolean = false;
+  @observable private notLoggedIn = false;
 
   @action private async loadPalettes(): Promise<void> {
     try {
@@ -33,7 +33,7 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
     confirmAlert({
       buttons: [{
         label: "Cancel",
-        onClick: () => { }
+        onClick: () => { return; }
       }, {
         label: "Yep",
         onClick: () => this.deletePalette(palette)
@@ -44,7 +44,7 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
   }
 
   private async deletePalette(palette: Palette): Promise<void> {
-    const result = await apiFetch<Palette>(`/palette/me/${palette.id}`, "DELETE");
+    await apiFetch<Palette>(`/palette/me/${palette.id}`, "DELETE");
     this.loadPalettes();
   }
 
@@ -52,7 +52,7 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
     this.loadPalettes();
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <section className="saved-palettes">
         {!this.loaded && !this.notLoggedIn && (

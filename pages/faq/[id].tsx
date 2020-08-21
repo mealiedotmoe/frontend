@@ -38,7 +38,7 @@ class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getS
     )
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <section className="faq-container">
         <Head>

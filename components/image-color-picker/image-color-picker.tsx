@@ -7,14 +7,14 @@ import { MdContentCopy, MdImage } from 'react-icons/md';
 import { ImageCanvas, ImageCanvasData } from './image-canvas';
 
 export interface ImageColorPickerProps {
-  onChange: (color: string) => any;
+  onChange: (color: string) => unknown;
 }
 
 @observer
 export class ImageColorPicker extends React.Component<ImageColorPickerProps> {
-  @observable private imageLoaded: boolean = false;
+  @observable private imageLoaded = false;
   @observable private canvasData: ImageCanvasData | null = null;
-  @observable private currentColor: string = "#000000";
+  @observable private currentColor = "#000000";
   private inputContainerRef: React.RefObject<HTMLDivElement> = React.createRef();
 
   @action private async addFiles(files: Array<File>): Promise<void> {
@@ -103,7 +103,7 @@ export class ImageColorPicker extends React.Component<ImageColorPickerProps> {
               <span className="middle-text">OR</span>
               <section className="hint">
                 <MdContentCopy className="image-icon" />
-                Drag n' drop
+                Drag n&apos; drop
               </section>
             </section>
           </section>
@@ -112,7 +112,7 @@ export class ImageColorPicker extends React.Component<ImageColorPickerProps> {
     )
   }
 
-  public render() {
+  public render(): React.ReactNode {
     return (
       <section className="image-color-picker-container">
         {this.renderContent}

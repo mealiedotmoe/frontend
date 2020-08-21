@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken';
 import Link from 'next/link';
 
 class SlugPage extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
-  public render() {
+  public render(): React.ReactNode {
     return (
       <main className="page-view-container">
         <Head>
