@@ -31,7 +31,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
   public componentDidMount(): void {
     if (!this.props.isAdmin) {
       redirectToLogin();
-      return null;
+      return;
     }
     this.faqContent.content = this.props.currentFAQ.content;
     this.color = this.props.currentFAQ.color;
