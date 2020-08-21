@@ -110,9 +110,14 @@
       left: 0;
       top: calc((100vh * 8.25 / 10) - 50px);
       height: 99vh;
+      padding: 16px;
       padding-top: 1vh;
-      width: calc(100vw - 64px);
+      width: calc(100vw - 32px);
       background: #101015;
+
+      .scroll-container {
+        padding-bottom: 7.5vh;
+      }
     }
     .faq-card-content {
       position: unset;

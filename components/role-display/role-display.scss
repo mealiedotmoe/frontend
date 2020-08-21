@@ -33,8 +33,13 @@
 
 @media (max-width:961px) {
   .role-display {
+    border-radius: 5px 5px 0 0;
     .display {
-      width: 80px;
+      width: 100px;
+      
+      &.light-display {
+        border-radius: 0 5px 0 0;
+      }
     }
   }
 }

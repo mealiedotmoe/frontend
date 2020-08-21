@@ -168,12 +168,14 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
               <label className="input-label">Text to display</label>
               <input className="text-field" value={this.displayText} onChange={ev => this.displayText = ev.target.value} />
             </header>
-            <header className="col-header">
-              Dark
-            </header>
-            <header className="col-header">
-              Light
-            </header>
+            <div className="check-container header">
+              <header className="col-header">
+                Dark
+              </header>
+              <header className="col-header">
+                Light
+              </header>
+            </div>
             {ROLES.map(role => (
               <>
                 <RoleDisplay
@@ -183,16 +185,30 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
                   key={role}
                   role={role} className={role === this.selectedRole ? "selected" : ""}
                 />
-                {Color(this.roleColorMap[role]).contrast(Color("#36393F")) < 3.1 ? (
-                  <div className="icon-container"><MdClose className="status-icon warn" /></div>
-                ) : (
-                  <div className="icon-container"><MdCheck className="status-icon check" /></div>
-                )}
-                {Color(this.roleColorMap[role]).contrast(Color("#FFFFFF")) < 3.1 ? (
-                  <div className="icon-container"><MdClose className="status-icon warn" /></div>
-                ) : (
-                  <div className="icon-container"><MdCheck className="status-icon check" /></div>
-                )}
+                <div className="check-container">
+                  {Color(this.roleColorMap[role]).contrast(Color("#36393F")) < 3.1 ? (
+                    <div className="icon-container">
+                      <MdClose className="status-icon warn" />
+                      <span className="contrast-label">Dark</span>
+                </div>
+                  ) : (
+                    <div className="icon-container">
+                      <MdCheck className="status-icon check" />
+                      <span className="contrast-label">Dark</span>
+                    </div>
+                  )}
+                  {Color(this.roleColorMap[role]).contrast(Color("#FFFFFF")) < 3.1 ? (
+                    <div className="icon-container">
+                      <MdClose className="status-icon warn" />
+                      <span className="contrast-label">Light</span>
+                    </div>
+                  ) : (
+                    <div className="icon-container">
+                      <MdCheck className="status-icon check" />
+                      <span className="contrast-label">Light</span>
+                    </div>
+                  )}
+                </div>
               </>
             ))}
           </section>

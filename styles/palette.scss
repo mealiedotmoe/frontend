@@ -10,6 +10,7 @@
   .color-picker-container {
     background: rgba(0,0,0,.24);
     position: relative;
+    z-index: 1;
 
     .actions {
       position: absolute;
@@ -30,11 +31,24 @@
     .roles-display {
       margin-top: 24px;
       display: grid;
-      grid-template-columns: 6fr 2fr 2fr;
+      grid-template-columns: 6fr 4fr;
       color: rgba(255,255,255,.6);
 
+      .check-container {
+        display: flex;
+
+        .contrast-label {
+          display: none;
+          visibility: hidden;
+        }
+
+        & > * {
+          flex-grow: 1;
+        }
+      }
+
       & > * {
-        margin: 8px 10px;
+        margin: 8px 0;
       }
 
       .selected {
@@ -78,10 +92,6 @@
     .actions {
       margin-top: 16px;
       display: flex;
-
-      & > .button:first-child {
-        margin-left: 14px;
-      }
     }
 
     .backdrop {
@@ -91,14 +101,14 @@
       right: 0;
       bottom: 0;
       background-color: rgba(0,0,0,.4);
-      z-index: 2;
+      z-index: 7;
     }
 
     .image-panel {
       position: fixed;
-      width: calc(((100vw / 13) * 8) - 128px - 32px);
+      width: calc(60vw - 32px);
       // left: calc(((100vw / 13) * 5) + 32px);
-      right: 64px;
+      right: calc(20vw - 16px);
       height: calc(50vh - 32px);
       border-radius: 5px 5px 0 0;
       background-color: #31313E;
@@ -108,11 +118,11 @@
       padding: 16px;
       display: flex;
       align-items: flex-start;
-      z-index: 5;
 
       img {
         border-radius: 5px;
         box-shadow: 0 4px 5px rgba(0,0,0,.4);
+        display: block;
       }
       
       .info-container {
@@ -132,7 +142,7 @@
           margin-top: 16px;
 
           .button {
-            display: block;
+            display: inline-block;
             margin: 8px 0;
             line-height: 1.5;
           }
@@ -156,12 +166,18 @@
 @media (max-width:961px) {
   .picker-container {
     grid-template-columns: auto;
+    height: 100vh;
+    overflow: unset;
 
     .color-picker-container {
       position: fixed;
       background: #101015;
       top: 60vh;
       width: 100vw;
+      height: auto;
+      overflow: hidden;
+      // display: none;
+      // height: 100vh !important;
 
       .actions {
         display: none;
@@ -169,17 +185,75 @@
       }
     }
     .content {
-      padding: 16px 8px;
+      padding: 16px;
+      padding-bottom: 40vh;
+      height: auto;
+      overflow: auto;
 
       .roles-display {
         grid-template-columns: 1fr;
+
+        & > * {
+          margin: 0;
+        }
+
+        .check-container {
+          border-radius: 0 0 5px 5px;
+          background: rgba(255,255,255,.1);
+          margin-bottom: 12px;
+          padding: 12px;
+
+          &.header {
+            display: none;
+            visibility: hidden;
+          }
+
+          .contrast-label {
+            display: inline-block;
+            visibility: visible;
+            margin-left: 8px;
+            color: rgba(255,255,255,.6);
+          }
+        }
       }
       .col-header {
+        margin-bottom: 16px;
+        
         &.input-header {
           justify-content: flex-start;
 
           .text-field {
             margin-left: 8px;
+          }
+        }
+      }
+    }
+
+    .image-panel {
+      height: calc(90vh - 32px) !important;
+      width: calc(95vw - 32px) !important;
+      left: calc(2.5vw);
+      flex-direction: column;
+
+      .info-container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 8px 0 !important;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        
+        .info-header {
+          font-size: 24px !important;
+        }
+
+        .info-content {
+          text-align: center;
+        }
+
+        .flex {
+          .button {
+            font-size: 10px;
           }
         }
       }

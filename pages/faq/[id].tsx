@@ -88,7 +88,6 @@ export const getServerSideProps: GetServerSideProps<{
   isAdmin: boolean;
 }> = async (context: GetServerSidePropsContext) => {
   const token = cookies(context)['session-jwt'];
-  console.log("fuck", token);
   const faqs = await apiFetch<Array<IFAQ>>("/faq", "GET");
   const faqContent = await apiFetch<ISpecificFAQ>(`/faq/${context.params?.id}`, "GET");
   if (!token) {

@@ -106,8 +106,30 @@
 
 @media (max-width:961px) {
   .color-picker {
-    height: calc(80vh - 51px);
+    height: calc(80vh - 15vh - 51px);
 
     .picker-body {}
+
+    .slider-component {
+      grid-template-columns: auto;
+      .slider-label {
+        margin-bottom: 8px;
+      }
+    }
+
+    .selected-info-container {
+      display: block;
+
+      .label {
+        width: auto;
+      }
+      .hsl {
+        flex-direction: row-reverse;
+
+        input {
+          width: 90px !important;
+        }
+      }
+    }
   }
 }

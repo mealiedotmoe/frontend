@@ -1,9 +1,11 @@
 import * as React from 'react';
 import interact from 'interactjs';
+import { MdArrowDropDown } from 'react-icons/md';
 
 export interface PanelDragHandleProps {
   onPositionChange?: (x: number, y: number) => unknown;
   getSelfPosition?: (rect: DOMRect) => unknown;
+  onDock?: () => unknown;
 }
 
 export class PanelDragHandle extends React.Component<PanelDragHandleProps> {
@@ -30,6 +32,9 @@ export class PanelDragHandle extends React.Component<PanelDragHandleProps> {
       <div className="panel-drag-handle-container" ref={this.handleRef}>
         <div className="panel-drag-handle" />
         Pull Up
+        <button className="button text dock-btn" onClick={this.props.onDock}>
+          <MdArrowDropDown className="icon" /> Dock
+        </button>
       </div>
     );
   }

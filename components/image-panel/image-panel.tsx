@@ -34,10 +34,10 @@ export const ImagePanel: React.FunctionComponent<ImagePanelProps> = (props: Imag
             </button>
           </form>
           <a className="button" href={props.paletteImageSrc} download={`palette.png`}>
-            Download this image
+            Download
           </a>
-          <button className="button warn" onClick={props.onClose}>
-            Make some more changes
+          <button className="button warn" onClick={props.onClose} style={{ marginLeft: 8 }}>
+            Back
           </button>
         </article>
       </section>

@@ -49,9 +49,11 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
           <title>FAQ: Mealie.Moe</title>
         </Head>
         <DraggablePanel className="faq-card-list">
-          <Scrollbars universal>
-            {this.renderFAQCards}
-          </Scrollbars>
+          <section className="scroll-container">
+            <Scrollbars universal>
+              {this.renderFAQCards}
+            </Scrollbars>
+          </section>
         </DraggablePanel>
         <main className="faq-card-content">
           <PageTitle title="Frequently Asked Questions" />

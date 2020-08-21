@@ -53,7 +53,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
   if (admin) {
     if (isMobile) {
       return (
-        <section className={`navigator ${centered && "centered"}`}>
+        <section className={`navigator centered`}>
           <Link href="/admin/users">
             <a className="link">
               <MdAccountCircle className="icon" />
@@ -78,7 +78,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
       );
     }
     return (
-      <section className={`navigator ${centered && "centered"}`}>
+      <section className={`navigator centered`}>
         <label className="navigator-title">
           Navigate: Admin
         </label>
@@ -102,7 +102,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
 
   if (isMobile) {
     return (
-      <section className={`navigator ${centered && "centered"}`}>
+      <section className={`navigator centered`}>
         <Link href="/faq">
           <a className="link">
             <QuestionIcon className="icon" />
@@ -137,7 +137,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
   }
 
   return (
-    <section className={`navigator ${centered && "centered"}`}>
+    <section className={`navigator centered`}>
       <label className="navigator-title">
         Navigate
       </label>

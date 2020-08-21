@@ -49,13 +49,13 @@ class ColorPicker extends React.Component<CustomPickerProps<ColorPicker>> {
               }}
             />
             <section className="info">
-              Red: {Color(this.props.color).red()}
+              <span className="color-header">Red:</span> {Color(this.props.color).red()}
             </section>
             <section className="info">
-              Green: {Color(this.props.color).green()}
+              <span className="color-header">Green:</span> {Color(this.props.color).green()}
             </section>
             <section className="info">
-              Blue: {Color(this.props.color).blue()}
+              <span className="color-header">Blue:</span> {Color(this.props.color).blue()}
             </section>
           </section>
         </section>

@@ -14,14 +14,16 @@
 
 @media (max-width:961px) {
   .panel-drag-handle-container {
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     visibility: visible;
-    padding: 15px 0;
+    padding: 15px 16px;
     color: rgba(255,255,255,.6);
     font-size: 11px;
+    width: calc(100% - 32px);
 
     .panel-drag-handle {
       display: block;
@@ -31,6 +33,19 @@
       border-radius: 3px;
       background: #ffffff;
       margin-bottom: 5px;
+    }
+
+    .dock-btn {
+      position: absolute;
+      right: 0;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon {
+        font-size: 32px;
+      }
     }
   }
 }
