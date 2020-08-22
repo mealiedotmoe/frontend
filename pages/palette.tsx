@@ -7,7 +7,6 @@ import Head from 'next/head';
 import * as React from 'react';
 import { MdCheck, MdClose } from 'react-icons/md';
 import { animals, colors, uniqueNamesGenerator } from 'unique-names-generator';
-import { default as SwipeableView } from 'react-swipeable-views';
 
 import ColorPicker from '../components/color-picker/color-picker';
 import { ImageColorPicker } from '../components/image-color-picker/image-color-picker';
@@ -145,19 +144,25 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
               Saved
             </button>
           </nav>
-          <SwipeableView resistance index={this.tabIndex} onChangeIndex={index => this.tabIndex = index}>
-            <ColorPicker
-              color={this.roleColorMap[this.selectedRole]}
-              onChange={(color) => this.changeSelectedColor(color.hex)}
-            />
-            <ImageColorPicker
-              onChange={color => this.changeSelectedColor(color)}
-            />
-            <SavedPalettes
-              onChange={(palette: APIPalette) => this.initPaletteFromSaved(palette)}
-              onColorPick={(color: string) => this.changeSelectedColor(color)}
-            />
-          </SwipeableView>
+          <section className="picker-tabs-container">
+            {this.tabIndex === 0 && (
+              <ColorPicker
+                color={this.roleColorMap[this.selectedRole]}
+                onChange={(color) => this.changeSelectedColor(color.hex)}
+              />
+            )}
+            {this.tabIndex === 1 && (
+              <ImageColorPicker
+                onChange={color => this.changeSelectedColor(color)}
+              />
+            )}
+            {this.tabIndex === 2 && (
+              <SavedPalettes
+                onChange={(palette: APIPalette) => this.initPaletteFromSaved(palette)}
+                onColorPick={(color: string) => this.changeSelectedColor(color)}
+              />
+            )}
+          </section>
         </>
       );
     }

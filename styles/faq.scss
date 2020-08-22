@@ -104,11 +104,12 @@
 @media (max-width:961px) {
   .faq-container {
     grid-template-columns: 1fr;
+    height: auto;
 
     .faq-card-list {
       position: fixed;
       left: 0;
-      top: calc((100vh * 8.25 / 10) - 50px);
+      top: calc((100vh * 7.25 / 10) - 50px);
       height: 99vh;
       padding: 16px;
       padding-top: 1vh;

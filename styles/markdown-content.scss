@@ -82,3 +82,38 @@
     border-radius: 0 5px 5px 0;
   }
 }
+
+@media (max-width:961px) {
+  .markdown-content {
+    h1 {
+      font-size: calc(14px * 2.75);
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    h2 {
+      font-size: calc(14px * 2.25);
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    h3 {
+      font-size: calc(14px * 2);
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    h4 {
+      font-size: calc(14px * 1.75);
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    h5 {
+      font-size: calc(14px * 1.5);
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    h6 {
+      font-size: calc(14px * 1);
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+  }
+}

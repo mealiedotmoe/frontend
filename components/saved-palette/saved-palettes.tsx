@@ -84,9 +84,11 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
           </>
         )}
         {this.notLoggedIn && (
-          <button className="button" onClick={() => redirectToLogin()}>
-            You need to log in first
-          </button>
+          <section className="loading-hint">
+            <button className="button" onClick={() => redirectToLogin()}>
+              You need to log in first
+            </button>
+          </section>
         )}
       </section>
     )

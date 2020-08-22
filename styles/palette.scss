@@ -205,6 +205,10 @@
           }
         }
       }
+
+      .picker-tabs-container {
+        height: calc(70vh - 51px);
+      }
     }
     .content {
       padding: 16px;
