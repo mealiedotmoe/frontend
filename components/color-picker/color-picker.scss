@@ -108,7 +108,9 @@
   .color-picker {
     height: calc(80vh - 15vh - 51px);
 
-    .picker-body {}
+    .picker-body {
+      height: 70%;
+    }
 
     .slider-component {
       grid-template-columns: auto;

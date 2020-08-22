@@ -7,6 +7,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import { MdCheck, MdClose } from 'react-icons/md';
 import { animals, colors, uniqueNamesGenerator } from 'unique-names-generator';
+import { default as SwipeableView } from 'react-swipeable-views';
 
 import ColorPicker from '../components/color-picker/color-picker';
 import { ImageColorPicker } from '../components/image-color-picker/image-color-picker';
@@ -31,12 +32,18 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
   @observable private generatedPaletteImageSrc?: string;
   @observable private paletteName: string = uniqueNamesGenerator({ dictionaries: [colors, animals], length: 2, separator: " ", style: "capital" });
   @observable private saved = false;
+  @observable private isMobile = false;
+  @observable private tabIndex = 0;
 
   public constructor(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
     super(props);
     ROLES.forEach(role => this.roleColorMap[role] = '#428AE9');
   } 
   
+  public componentDidMount(): void {
+    const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+    this.isMobile = mobileRegex.test(navigator.userAgent.toLowerCase());
+  }
   
   @action private changeSelectedColor(color: string): void {
     this.roleColorMap[this.selectedRole] = color;
@@ -114,6 +121,47 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
   }
 
   @computed private get renderPickerComponent(): React.ReactNode {
+    if (this.isMobile) {
+      // It's a mobile device
+      return (
+        <>
+          <nav className="picker-tab-container">
+            <button
+              className={`picker-tab ${this.tabIndex === 0 && "selected"}`}
+              onClick={() => this.tabIndex = 0}
+            >
+              Color
+            </button>
+            <button
+              className={`picker-tab ${this.tabIndex === 1 && "selected"}`}
+              onClick={() => this.tabIndex = 1}
+            >
+              Image
+            </button>
+            <button
+              className={`picker-tab ${this.tabIndex === 2 && "selected"}`}
+              onClick={() => this.tabIndex = 2}
+            >
+              Saved
+            </button>
+          </nav>
+          <SwipeableView resistance index={this.tabIndex} onChangeIndex={index => this.tabIndex = index}>
+            <ColorPicker
+              color={this.roleColorMap[this.selectedRole]}
+              onChange={(color) => this.changeSelectedColor(color.hex)}
+            />
+            <ImageColorPicker
+              onChange={color => this.changeSelectedColor(color)}
+            />
+            <SavedPalettes
+              onChange={(palette: APIPalette) => this.initPaletteFromSaved(palette)}
+              onColorPick={(color: string) => this.changeSelectedColor(color)}
+            />
+          </SwipeableView>
+        </>
+      );
+    }
+
     switch (this.picker) {
       case 'image':
         return (

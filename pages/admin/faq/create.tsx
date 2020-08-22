@@ -17,6 +17,7 @@ import Router from "next/router";
 import { Alert } from '../../../components/alert/alert';
 import { Navigator } from '../../../components/navigator/navigator';
 import ReactMarkdown from 'react-markdown';
+import { DraggablePanel } from '../../../components/panel-drag/draggable-panel';
 
 @observer
 class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -107,21 +108,23 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
             Create FAQ: Admin - Mealie.Moe
           </title>
         </Head>
-        <aside className="faq-card-list">
-          <h1 className="title">Edit List</h1>
-          <Link href="/admin/faq/create">
-            <a>
-              <FAQCard tag="" title="" color="" id={0} createNew />
-            </a>
-          </Link>
-          {this.props.faqs.map(faq => (
-            <Link href={`/admin/faq/edit/${faq.id}`} key={faq.id}>
+        <DraggablePanel className="faq-card-list">
+          <section className="scroll-container">
+            <h1 className="title">Edit List</h1>
+            <Link href="/admin/faq/create">
               <a>
-                <FAQCard {...faq} />
+                <FAQCard tag="" title="" color="" id={0} createNew />
               </a>
             </Link>
-          ))}
-        </aside>
+            {this.props.faqs.map(faq => (
+              <Link href={`/admin/faq/edit/${faq.id}`} key={faq.id}>
+                <a>
+                  <FAQCard {...faq} />
+                </a>
+              </Link>
+            ))}
+          </section>
+        </DraggablePanel>
         <main className="faq-card-content">
           <PageTitle title="Create: FAQ" />
           <section className="tag-control">

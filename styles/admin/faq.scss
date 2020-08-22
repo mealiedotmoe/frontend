@@ -13,6 +13,12 @@
     height: calc(100% - 32px);
     overflow-y: auto;
 
+    .scroll-container {
+      width: 100%;
+      height: calc(100% - 51px);
+      overflow-y: auto;
+    }
+
     .title {
       margin: 12px 0;
       color: #ffffff;
@@ -147,6 +153,44 @@
         & > .button {
           margin-left: 14px;
         }
+      }
+    }
+  }
+}
+
+@media (max-width:961px) {
+  .faq-admin-container {
+    grid-template-columns: auto;
+
+    .faq-card-list {
+      position: fixed;
+      left: 0;
+      top: calc((100vh * 8.25 / 10) - 50px);
+      height: 99vh;
+      padding: 16px;
+      padding-top: 1vh;
+      width: calc(100vw - 32px);
+      background: #101015;
+
+      .scroll-container {
+        padding-bottom: 7.5vh;
+      }
+    }
+    .faq-card-content {
+      position: unset;
+      width: calc(100vw - 32px);
+      padding: 16px;
+
+      .title-input {
+        width: calc(100% - 32px);
+      }
+
+      .faq-title {
+        width: 90%;
+      }
+
+      .editor-container, .rendered-content-container {
+        margin-bottom: 30vh;
       }
     }
   }

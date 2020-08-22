@@ -80,3 +80,21 @@
     }
   }
 }
+
+@media (max-width:961px) {
+  .saved-palettes {
+    & > .button {
+      margin: auto auto;
+    }
+
+    .palettes-container {
+      grid-template-columns: 1fr;
+      padding: 8px;
+      width: calc(100% - 16px);
+
+      .palette-card {
+        margin: 8px;
+      }
+    }
+  }
+}

@@ -16,6 +16,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { Navigator } from '../../../../components/navigator/navigator';
 import ReactMarkdown from 'react-markdown';
+import { DraggablePanel } from '../../../../components/panel-drag/draggable-panel';
 
 @observer
 class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -102,21 +103,23 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
             Editing: {this.props.currentFAQ.title}; Mealie.Moe - Admin
           </title>
         </Head>
-        <aside className="faq-card-list">
-          <Link href="/admin/faq/create">
-            <a>
-              <FAQCard tag="" title="" color="" id={0} createNew />
-            </a>
-          </Link>
-          <h1 className="title">Edit List</h1>
-          {this.props.faqs.map(faq => (
-            <Link href={`/admin/faq/edit/${faq.id}`} key={faq.id}>
+        <DraggablePanel className="faq-card-list">
+          <section className="scroll-container">
+            <Link href="/admin/faq/create">
               <a>
-                <FAQCard {...faq} selected={this.props.currentFAQ.id === faq.id} />
+                <FAQCard tag="" title="" color="" id={0} createNew />
               </a>
             </Link>
-          ))}
-        </aside>
+            <h1 className="title">Edit List</h1>
+            {this.props.faqs.map(faq => (
+              <Link href={`/admin/faq/edit/${faq.id}`} key={faq.id}>
+                <a>
+                  <FAQCard {...faq} selected={this.props.currentFAQ.id === faq.id} />
+                </a>
+              </Link>
+            ))}
+          </section>
+        </DraggablePanel>
         <section className="faq-card-content">
           <PageTitle title={`Editing: ${this.props.currentFAQ.title}`} />
           <section className="tag-control">

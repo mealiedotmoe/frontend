@@ -44,7 +44,7 @@ function conditionalRender(loggedIn: boolean, isMobile: boolean): React.ReactNod
   );
 }
 
-export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, loggedIn, centered }: NavigatorProps): JSX.Element => {
+export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, loggedIn }: NavigatorProps): JSX.Element => {
   const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
   const [isMobile, setIsMobile] = React.useState<boolean>(false);
 
@@ -69,7 +69,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
               <MdPages className="icon" />
             </a>
           </Link>
-          <Link href="/admin/pages">
+          <Link href="/">
             <a className="link">
               <MdDashboard className="icon" />
             </a>

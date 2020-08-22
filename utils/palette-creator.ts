@@ -31,7 +31,7 @@ export function paletteCreator(roleColorMap: { [key: string]: string; }, usernam
     ctx.fillStyle = roleColorMap[role];
     ctx.font = "700 20px Inter";
     ctx.fillText(role, 15, offset + (index + 1) * 30);
-    ctx.font = "500 20px monospace";
+    ctx.font = "600 20px 'Overpass Mono'";
     ctx.fillText(roleColorMap[role].toLocaleUpperCase(), 201, offset + (index + 1) * 30);
   });
 

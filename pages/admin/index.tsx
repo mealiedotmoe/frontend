@@ -7,6 +7,8 @@ import { redirectToLogin } from '../../utils/login';
 import Head from 'next/head';
 import Link from 'next/link';
 import { MdAccountCircle, MdSchool, MdPages } from "react-icons/md";
+import { DraggablePanel } from '../../components/panel-drag/draggable-panel';
+import { Navigator } from '../../components/navigator/navigator';
 
 class AdminHome extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public componentDidMount(): void {
@@ -37,7 +39,7 @@ class AdminHome extends React.Component<InferGetServerSidePropsType<typeof getSe
             </p>
           </section>
         </section>
-        <aside className="link-container">
+        <DraggablePanel className="link-container">
           <section className="links">
             <Link href="/admin/users">
               <a className="link">
@@ -58,7 +60,8 @@ class AdminHome extends React.Component<InferGetServerSidePropsType<typeof getSe
               </a>
             </Link>
           </section>
-        </aside>
+        </DraggablePanel>
+        <Navigator loggedIn admin />
       </main>
     );
   }

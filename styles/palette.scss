@@ -183,6 +183,28 @@
         display: none;
         visibility: hidden;
       }
+
+      .picker-tab-container {
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 16px;
+
+        .picker-tab {
+          background: transparent;
+          border: none;
+          outline: none;
+          font-size: 18px;
+          font-family: inherit;
+          color: rgba(255,255,255,.6);
+          border-bottom: 3px solid rgba(255,255,255,.6);
+          padding: 0 8px 8px 8px;
+
+          &.selected {
+            color: rgba(255,255,255,1);
+            border-bottom-color: $primary-color;
+          }
+        }
+      }
     }
     .content {
       padding: 16px;
@@ -220,11 +242,7 @@
         margin-bottom: 16px;
         
         &.input-header {
-          justify-content: flex-start;
-
-          .text-field {
-            margin-left: 8px;
-          }
+          justify-content: flex-start !important;
         }
       }
     }

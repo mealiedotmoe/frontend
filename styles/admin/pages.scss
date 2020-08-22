@@ -81,3 +81,13 @@
     }
   }
 }
+
+@media (max-width:961px) {
+  .pages-admin {
+    .content-container {
+      width: calc(100vw - 16px);
+      margin-left: 0;
+      padding: 18px 8px;
+    }
+  }
+}
