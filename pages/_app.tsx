@@ -25,12 +25,14 @@ import '../styles/server-map.scss';
 import Head from 'next/head';
 import * as React from 'react';
 import { AppProps } from 'next/app';
+import { SocialMetaTags } from '../utils/social-meta-tags';
 
 export default function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <SocialMetaTags />
       </Head>
       <Component {...pageProps} />
     </>
