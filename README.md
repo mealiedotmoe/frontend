@@ -25,7 +25,7 @@ pants linting rules for this project, and simply following the recommended suite
 
 # Get it working yourself
 First of all you need to install docker and follow the guide to install the backend service over
-on [mealiedotmoe/backend](https://gitbub.com/mealiedotmoe/backend).
+on [mealiedotmoe/backend](https://github.com/mealiedotmoe/backend).
 After you are done with that simply clone this repository, and run
 ```sh
 # Install dependencies
