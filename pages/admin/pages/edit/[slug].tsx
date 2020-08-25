@@ -18,6 +18,7 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
   @observable private renderMarkdownPreview = false;
   @observable private content = "";
   @observable private title = "";
+  @observable private saving = false;
 
   public componentDidMount(): void {
     if (!this.props.isAdmin) {
@@ -44,11 +45,13 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
   }
 
   private async save(): Promise<void> {
+    this.saving = true;
     const result = await apiFetch<InfoPage>(`/info/${this.props.page.slug}`, "PUT", {
       content: this.content,
       title: this.title
     });
     window.location.pathname = `/pages/${result.slug}`;
+    this.saving = false;
   }
 
   public render(): React.ReactNode {
@@ -91,8 +94,8 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
               <button type="button" className="button text" onClick={() => this.renderMarkdownPreview = !this.renderMarkdownPreview}>
                 {this.renderMarkdownPreview && "Close"} Preview
               </button>
-              <button type="submit" className="button">
-                Save
+              <button type="submit" className="button" disabled={this.saving}>
+                {this.saving ? "Saving..." : "Save"}
               </button>
             </section>
           </form>

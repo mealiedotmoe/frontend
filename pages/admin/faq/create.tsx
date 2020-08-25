@@ -28,6 +28,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
   @observable private content = "";
   @observable private error?: string;
   @observable private renderContentPreview = false;
+  @observable private submitting = false;
 
   public componentDidMount(): void {
     if (!this.props.isAdmin) {
@@ -52,6 +53,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
       this.error = "Content cannot be empty";
       return;
     }
+    this.submitting = true;
     const response = await apiFetch<IFAQ>("/faq", "POST", {
       tag: this.tag,
       color: this.color,
@@ -60,6 +62,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
     });
     const createdFAQId = response.id;
     Router.push(`/faq/${createdFAQId}`);
+    this.submitting = false;
   }
 
   @computed private get renderContent(): React.ReactNode {
@@ -92,8 +95,8 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
           <button className="button text" type="button" onClick={() => this.renderContentPreview = true}>
             Preview
           </button>
-          <button type="submit" className="button">
-            Save
+          <button type="submit" className="button" disabled={this.submitting}>
+            {this.submitting ? "Saving" : "Save"}
           </button>
         </section>
       </section>

@@ -28,6 +28,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
   @observable private color = "#FFFFFF";
   @observable private displayColorPicker = false;
   @observable private displayRenderContent = false;
+  @observable private submitting = false;
 
   public componentDidMount(): void {
     if (!this.props.isAdmin) {
@@ -60,8 +61,8 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
           <button className="button text" type="button" onClick={() => this.displayRenderContent = true}>
             Preview
           </button>
-          <button className="button" type="submit">
-            Save FAQ
+          <button className="button" type="submit" disabled={this.submitting}>
+            {this.submitting ? "Saving..." : "Save FAQ"}
           </button>
         </section>
       </form>
@@ -86,6 +87,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
   }
 
   private async save(): Promise<void> {
+    this.submitting = true;
     const response = await apiFetch<ISpecificFAQ>(`/faq/${this.props.currentFAQ.id}`, "PUT", {
       title: this.props.currentFAQ.title,
       content: this.faqContent.content,
@@ -93,6 +95,7 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
       color: this.color
     });
     Router.push(`/faq/${response.id}`);
+    this.submitting = false;
   }
 
   public render(): React.ReactNode {

@@ -34,7 +34,7 @@
 
 @media (max-width:961px) {
   .markdown-guide-container {
-    width: 100vw;
-    margin: 16px 0;
+    width: calc(100vw - 32px);
+    margin: 16px;
   }
 }
