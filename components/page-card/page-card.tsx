@@ -17,9 +17,9 @@ export const PageCard: React.FunctionComponent<PageCardProps> = ({ page, admin }
           {page.title}
         </header>
         <section className="meta">
-          <time className="created-at-time" data-tip data-for={`date-tooltip-${page.slug}`}>
+          <div className="created-at-time" data-tip data-for={`date-tooltip-${page.slug}`}>
             {(new Date(page.created_at)).toLocaleDateString()}
-          </time>
+          </div>
           <ReactTooltip type="light" id={`date-tooltip-${page.slug}`} effect="solid" place="bottom">
             Last Edit:&nbsp;&nbsp;&nbsp; {(new Date(page.updated_at)).toLocaleString()}
             <br />

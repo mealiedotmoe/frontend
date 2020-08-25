@@ -31,3 +31,10 @@
     }
   }
 }
+
+@media (max-width:961px) {
+  .markdown-guide-container {
+    width: 100vw;
+    margin: 16px 0;
+  }
+}

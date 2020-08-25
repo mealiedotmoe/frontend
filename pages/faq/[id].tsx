@@ -40,7 +40,7 @@ class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getS
 
   public render(): React.ReactNode {
     return (
-      <section className="faq-container">
+      <main className="faq-container">
         <Head>
           <title>FAQ - {this.props.faqContent.tag}: Mealie.Moe</title>
         </Head>
@@ -51,7 +51,7 @@ class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getS
             </Scrollbars>
           </section>
         </DraggablePanel>
-        <main className="faq-card-content">
+        <section className="faq-card-content">
           <PageTitle title={`${this.props.faqContent.title} - FAQ`} />
           <section className="tags-container">
             <div
@@ -71,8 +71,8 @@ class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getS
           </section>
           {this.renderCardContent}
           <Navigator loggedIn={this.props.loggedIn} />
-        </main>
-      </section>
+        </section>
+      </main>
     );
   }
 }

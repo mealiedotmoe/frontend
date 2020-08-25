@@ -15,10 +15,10 @@ class Pages extends React.Component<InferGetServerSidePropsType<typeof getServer
         <Head>
           <title>Info Pages: Mealie.Moe</title>
         </Head>
-        <main className="content-container">
+        <section className="content-container">
           <PageTitle title="Info Pages" />
           {this.props.pages.map(page => <PageCard page={page} key={page.slug} />)}
-        </main>
+        </section>
         <Navigator centered loggedIn={this.props.loggedIn} />
       </main>
     )

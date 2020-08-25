@@ -53,12 +53,7 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
   if (admin) {
     if (isMobile) {
       return (
-        <section className={`navigator centered`}>
-          <Link href="/admin/users">
-            <a className="link">
-              <MdAccountCircle className="icon" />
-            </a>
-          </Link>
+        <nav className={`navigator centered`}>
           <Link href="/admin/faq/create">
             <a className="link">
               <MdSchool className="icon" />
@@ -74,18 +69,15 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
               <MdDashboard className="icon" />
             </a>
           </Link>
-        </section>
+        </nav>
       );
     }
     return (
-      <section className={`navigator centered`}>
+      <div className={`navigator centered`}>
         <label className="navigator-title">
           Navigate: Admin
         </label>
-        <section className="links">
-          <Link href="/admin/users">
-            <a className="link">Users</a>
-          </Link>
+        <nav className="links">
           <Link href="/admin/pages">
             <a className="link">Pages</a>
           </Link>
@@ -95,14 +87,14 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
           <Link href="/">
             <a className="link">Non-Admin dashboard</a>
           </Link>
-        </section>
-      </section>
+        </nav>
+      </div>
     );
   }
 
   if (isMobile) {
     return (
-      <section className={`navigator centered`}>
+      <nav className={`navigator centered`}>
         <Link href="/faq">
           <a className="link">
             <QuestionIcon className="icon" />
@@ -127,28 +119,28 @@ export const Navigator: React.FunctionComponent<NavigatorProps> = ({ admin, logg
             Server Map
           </a>
         </Link>
-        <a className="link" target="__blank" href="https://www.danbo.space/leaderboards/148606162810568704">
+        <a className="link" target="_blank" rel="noreferrer" href="https://www.danbo.space/leaderboards/148606162810568704">
           <MedalIcon className="icon" />
           Leaderboards
         </a>
         {conditionalRender(Boolean(loggedIn), isMobile)}
-      </section>
+      </nav>
     )
   }
 
   return (
-    <section className={`navigator centered`}>
+    <div className={`navigator centered`}>
       <label className="navigator-title">
         Navigate
       </label>
-      <section className="links">
+      <nav className="links">
         <Link href="/faq"><a className="link">FAQ</a></Link>
         <Link href="/pages"><a className="link">Pages</a></Link>
         <Link href="/palette"><a className="link">Palette</a></Link>
         <Link href="/server-map"><a className="link">Server Map</a></Link>
-        <a className="link" target="__blank" href="https://www.danbo.space/leaderboards/148606162810568704">Leaderboards <MdOpenInNew /></a>
+        <a className="link" target="_blank" rel="noreferrer" href="https://www.danbo.space/leaderboards/148606162810568704">Leaderboards <MdOpenInNew /></a>
         {conditionalRender(Boolean(loggedIn), isMobile)}
-      </section>
-    </section>
+      </nav>
+    </div>
   );
 }

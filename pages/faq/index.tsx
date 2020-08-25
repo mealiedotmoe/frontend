@@ -44,7 +44,7 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
 
   public render(): React.ReactNode {
     return (
-      <section className="faq-container">
+      <main className="faq-container">
         <Head>
           <title>FAQ: Mealie.Moe</title>
         </Head>
@@ -55,12 +55,12 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
             </Scrollbars>
           </section>
         </DraggablePanel>
-        <main className="faq-card-content">
+        <div className="faq-card-content">
           <PageTitle title="Frequently Asked Questions" />
           {this.renderCardContent}
           <Navigator loggedIn={Boolean(this.props.sessionToken)} />
-        </main>
-      </section>
+        </div>
+      </main>
     );
   }
 }

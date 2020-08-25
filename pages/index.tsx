@@ -9,11 +9,11 @@ import { DraggablePanel } from '../components/panel-drag/draggable-panel';
 class LandingPage extends React.Component<Record<string, unknown>> {
   public render(): React.ReactNode {
     return (
-      <section className="index-container">
+      <main className="index-container">
         <Head>
           <title>Landing: Mealie.Moe</title>
         </Head>
-        <main className="hero">
+        <div className="hero">
           <section className="text">
             <h1 className="title">
               Mealie.Moe
@@ -28,9 +28,9 @@ class LandingPage extends React.Component<Record<string, unknown>> {
           <span className="photo-credit">
             Photo by Paweł Czerwiński on Unsplash
           </span>
-        </main>
+        </div>
         <DraggablePanel className="links" noBottomNav>
-          <section className="psudeo-links">
+          <nav className="psudeo-links">
             <a href="/pages/server-info" className="nav-link">
               <RulerIcon className="icon rules" /> Rules
             </a>
@@ -40,15 +40,15 @@ class LandingPage extends React.Component<Record<string, unknown>> {
             <a href="/server-map" className="nav-link">
               <MapIcon className="icon map" /> Server Map
             </a>
-            <a href="https://danbo.space" target="__blank" className="nav-link">
+            <a href="https://danbo.space" target="_blank" rel="noreferrer" className="nav-link">
               <MedalIcon className="icon medal" /> Leaderboards <ExternalLinkIcon className="external-link-icon" />
             </a>
             <a href="/faq" className="nav-link">
               <QuestionIcon className="icon faq" /> Frequently Asked Questions
             </a>
-          </section>
+          </nav>
         </DraggablePanel>
-      </section>
+      </main>
     );
   }
 }

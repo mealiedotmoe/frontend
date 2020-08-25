@@ -214,7 +214,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
             </section>
           </>
         </DraggablePanel>
-        <main className="content">
+        <section className="content">
           <PageTitle title="Color Palette" />
           <section className="roles-display">
             <header className="col-header input-header">
@@ -272,7 +272,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
           </section>
           {this.imagePanel}
           <Navigator loggedIn={this.props.loggedIn} />
-        </main>
+        </section>
       </section>
     )
   }
