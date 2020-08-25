@@ -21,6 +21,14 @@
       color: #36393F;
       font-size: 96px;
       margin: 18px 0;
+      display: flex;
+      align-items: center;
+
+      .mealie {
+        height: 96px;
+        width: auto;
+        margin-right: 16px;
+      }
     }
     .subtitle {
       color: #313148;
@@ -101,12 +109,13 @@
     .hero {
       width: 90vw;
       padding-left: 10vw;
-      padding-top: 15vh;
+      padding-top: 5vh;
       height: 85vh;
       justify-content: flex-start;
 
       .title {
         font-size: 48px;
+        display: block;
       }
       .subtitle {
         width: 90%;

@@ -16,12 +16,13 @@ class LandingPage extends React.Component<Record<string, unknown>> {
         <div className="hero">
           <section className="text">
             <h1 className="title">
+              <img src="/images/mealie.png" className="mealie" />
               Mealie.Moe
             </h1>
             <p className="subtitle">
               The r/Anime_IRL Discord server! Though mostly not much about anime at all.
             </p>
-            <a href="https://discord.gg/anime" className="join-button" target="__blank">
+            <a href="https://discord.gg/anime" className="join-button" target="_blank" rel="noreferrer">
               Join Server
             </a>
           </section>

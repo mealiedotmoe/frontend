@@ -57,11 +57,13 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
       <section className="saved-palettes">
         {!this.loaded && !this.notLoggedIn && (
           <section className="loading-hint">
-            Loading palettes...
+            <img src="/images/undraw_in_thought.svg" className="illustration" />
+            Loading palettes
           </section>
         )}
         {this.loaded && !this.notLoggedIn && this.palettes.length === 0 && (
           <section className="loading-hint">
+            <img src="/images/undraw_empty.svg" className="illustration" />
             No palettes saved yet
           </section>
         )}
@@ -85,6 +87,7 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
         )}
         {this.notLoggedIn && (
           <section className="loading-hint">
+            <img src="/images/undraw_enter.svg" className="illustration" />
             <button className="button" onClick={() => redirectToLogin()}>
               You need to log in first
             </button>
