@@ -10,6 +10,7 @@ its workings and how you can contribute if you want to!
 - [Get it working yourself](#get-it-working-yourself)
 - [Project Architecture](#project-architecture)
 - [Helping out](#helping-out)
+  - [Extra](#extra)
 
 # Tooling
 You can take a look at the entire tooling in the `package.json` file, but in short,
@@ -60,3 +61,7 @@ Have you found a bug that we might have missed, or want to contribute with a fix
 Shoot an [issue](https://github.com/mealiedotmoe/frontend/issues/new) or send in PR and we'll be happy to review them and get them included!
 
 If you still feel lost, but want to contribute, feel free to ping me on discord Ikari#5684.
+
+## Extra
+If you want to take a look at how the original mock ups of the design looked check out the figma project
+https://www.figma.com/file/QQdg0q5vy5lbg6FOH75FQ0/Mealie-Redesign?node-id=0%3A3
