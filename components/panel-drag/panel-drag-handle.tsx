@@ -30,8 +30,12 @@ export class PanelDragHandle extends React.Component<PanelDragHandleProps> {
   public render(): React.ReactNode {
     return (
       <div className="panel-drag-handle-container" ref={this.handleRef}>
-        <div className="panel-drag-handle" />
-        Pull Up
+        <span className="panel-drag-text">
+          <div className="panel-drag-handle" />
+          <span>
+            Pull Up
+          </span>
+        </span>
         <button className="button text dock-btn" onClick={this.props.onDock}>
           <MdArrowDropDown className="icon" /> Dock
         </button>
