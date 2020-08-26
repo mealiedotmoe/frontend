@@ -41,7 +41,7 @@ class LandingPage extends React.Component<Record<string, unknown>> {
             <a href="/server-map" className="nav-link">
               <MapIcon className="icon map" /> Server Map
             </a>
-            <a href="https://danbo.space" target="_blank" rel="noreferrer" className="nav-link">
+            <a href="https://www.danbo.space/leaderboards/148606162810568704" target="_blank" rel="noreferrer" className="nav-link">
               <MedalIcon className="icon medal" /> Leaderboards <ExternalLinkIcon className="external-link-icon" />
             </a>
             <a href="/faq" className="nav-link">
