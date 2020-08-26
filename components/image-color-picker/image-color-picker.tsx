@@ -5,6 +5,7 @@ import Dropzone, { DropzoneState } from 'react-dropzone';
 import { MdContentCopy, MdImage } from 'react-icons/md';
 
 import { ImageCanvas, ImageCanvasData } from './image-canvas';
+import Constants from "../../utils/constants.json";
 
 export interface ImageColorPickerProps {
   onChange: (color: string) => unknown;
@@ -60,7 +61,7 @@ export class ImageColorPicker extends React.Component<ImageColorPickerProps> {
     // We use a set timeout here for a small duration here
     // since after the action is propagated it takes a cycle 
     // of render to happen before the input is mounted again.
-    setTimeout(() => this.inputContainerRef.current?.click(), 10);
+    setTimeout(() => this.inputContainerRef.current?.click(), Constants.NEW_IMAGE_OPEN_TIMEOUT);
   }
   
   @computed private get renderContent(): React.ReactNode {

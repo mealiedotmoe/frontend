@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IFAQ } from '../../utils/api-return-types';
 import Color from 'color';
+import Constants from "../../utils/constants.json";
 
 export interface FAQCardProps extends IFAQ {
   selected?: boolean;
@@ -20,7 +21,13 @@ export const FAQCard: React.FunctionComponent<FAQCardProps & { createNew?: boole
         {props.title}
       </section>
       <section className="faq-card-tags">
-        <div className="faq-tag" style={{ background: props.color, color: Color(props.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}>
+        <div
+          className="faq-tag"
+          style={{
+            background: props.color,
+            color: Color(props.color).contrast(Color("#FFFFFF")) < Constants.FAQ_TAGS_MIN_CONTRAST ? "#202020" : "#FFFFFF"
+          }}
+        >
           <span>{props.tag}</span>
         </div>
       </section>

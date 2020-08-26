@@ -2,15 +2,22 @@ import * as React from 'react';
 import { observable } from 'mobx';
 import { API_BASE } from '../utils/api-fetch';
 import { observer } from 'mobx-react';
+import Constants from "../utils/constants.json";
 
 @observer
 export default class LoginRedirect extends React.Component<Record<string, unknown>> {
-  @observable private timeout: NodeJS.Timeout = setTimeout(() => { return; }, 0);
-  @observable private timer = 5;
+  @observable private timeout: NodeJS.Timeout = setTimeout(() => { return; }, Constants.EMPTY_LENGHT);
+  @observable private timer = Constants.LOGIN_REDIRECT_TIMEOUT;
 
   public componentDidMount(): void {
-    this.timeout = setTimeout(() => window.location.href = `${API_BASE}/auth/login`, 5000);
-    setInterval(() => this.timer >= 0 && this.timer--, 1000);
+    this.timeout = setTimeout(
+      () => window.location.href = `${API_BASE}/auth/login`,
+      Constants.LOGIN_REDIRECT_TIMEOUT * Constants.SECONDS_TO_MILLISECONDS_FACTOR
+    );
+    setInterval(
+      () => this.timer >= Constants.EMPTY_LENGHT && this.timer--,
+      Constants.SECONDS_TO_MILLISECONDS_FACTOR
+    );
   }
 
   private goBack(): void {

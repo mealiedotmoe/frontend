@@ -9,12 +9,12 @@ import { PageCard } from '../../../components/page-card/page-card';
 import { PageTitle } from '../../../components/page-title/page-title';
 import { apiFetch } from '../../../utils/api-fetch';
 import { DecodedJWT, InfoPage } from '../../../utils/api-return-types';
-import { redirectToLogin } from '../../../utils/login';
+// import { redirectToLogin } from '../../../utils/login';
 
 class Pages extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public componentDidMount(): void {
     if (!this.props.loggedIn) {
-      redirectToLogin();
+      // redirectToLogin();
       return;
     }
   }

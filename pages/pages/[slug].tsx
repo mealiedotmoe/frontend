@@ -1,16 +1,18 @@
-import * as React from 'react';
-import { PageTitle } from '../../components/page-title/page-title';
-import { InferGetServerSidePropsType, GetServerSideProps, GetServerSidePropsContext } from 'next';
-import cookies from 'next-cookies';
-import { Navigator } from '../../components/navigator/navigator';
-import { apiFetch } from '../../utils/api-fetch';
-import { InfoPage, DecodedJWT } from '../../utils/api-return-types';
-import ReactMarkdown from 'react-markdown';
-import Head from 'next/head';
-import { UserDisplay } from '../../components/user-display/user-display';
-import ReactTooltip from 'react-tooltip';
 import jwt from 'jsonwebtoken';
+import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import cookies from 'next-cookies';
+import Head from 'next/head';
 import Link from 'next/link';
+import * as React from 'react';
+import ReactMarkdown from 'react-markdown';
+import ReactTooltip from 'react-tooltip';
+
+import { Navigator } from '../../components/navigator/navigator';
+import { PageTitle } from '../../components/page-title/page-title';
+import { UserDisplay } from '../../components/user-display/user-display';
+import { apiFetch } from '../../utils/api-fetch';
+import { DecodedJWT, InfoPage } from '../../utils/api-return-types';
+import Constants from '../../utils/constants.json';
 
 class SlugPage extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public render(): React.ReactNode {
@@ -23,7 +25,7 @@ class SlugPage extends React.Component<InferGetServerSidePropsType<typeof getSer
           <PageTitle title={this.props.page.title} />
           <section className="meta">
             <div>
-              ~{Math.ceil(this.props.page.content.split(" ").length / 200)} min read
+              ~{Math.ceil(this.props.page.content.split(" ").length / Constants.AVERAGE_READER_WPM)} min read
             </div>
             <div className="date" data-tip data-for="last-edit">
               {(new Date(this.props.page.created_at)).toLocaleDateString()}

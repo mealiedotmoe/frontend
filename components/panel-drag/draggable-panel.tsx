@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PanelDragHandle } from './panel-drag-handle';
+import Constants from "../../utils/constants.json";
 
 export interface DraggablePanelProps {
   children: React.ReactElement;
@@ -9,14 +10,13 @@ export interface DraggablePanelProps {
 
 export class DraggablePanel extends React.Component<DraggablePanelProps> {
   private panelRef = React.createRef<HTMLDivElement>();
-  private handleDistance = 8;
-  private lastYAxis = 0;
+  private handleDistance = Constants.DRAGABBLE_PANEL.handleDistance;
+  private lastYAxis = Constants.DRAGABBLE_PANEL.yAxisInit;
 
-  private dragHandleHeight = 54;
-  private navBarHeight = 50;
+  private dragHandleHeight = Constants.DRAGABBLE_PANEL.handleHeight;
 
   public componentDidMount(): void {
-    window.addEventListener('resize', () => this.movePanel(0, this.lastYAxis));
+    window.addEventListener('resize', () => this.movePanel(Constants.DRAGABBLE_PANEL.yAxisInit, this.lastYAxis));
   }
 
   private calculateDistance(rect: DOMRect) {
@@ -29,16 +29,22 @@ export class DraggablePanel extends React.Component<DraggablePanelProps> {
 
     const screenHeight = window.innerHeight;
     const position = y - this.handleDistance;
-    if (position <= screenHeight * 0.2) return;
+    if (position <= screenHeight * Constants.DRAGABBLE_PANEL.minimumDockScreenFactor) return;
     if (this.props.noBottomNav) {
       if (position >= screenHeight - this.dragHandleHeight) return;
     } else {
       // This is the height for the bottom nav, set in /styles/navigator.scss
-      if (position >= (screenHeight - (this.dragHandleHeight + this.navBarHeight))) return;
+      if (position >= (screenHeight - (this.dragHandleHeight + Constants.DRAGABBLE_PANEL.navBarHeight))) return;
     }
     this.lastYAxis = y;
     this.panelRef.current.style.top = `${position}px`;
-    this.panelRef.current.style.height = `${screenHeight - (this.props.noBottomNav ? 0 : 40) - y}px`;
+    this.panelRef.current.style.height = `
+      ${screenHeight - (
+        this.props.noBottomNav
+          ? Constants.DRAGABBLE_PANEL.offsetWithoutBottomNav
+          : Constants.DRAGABBLE_PANEL.bottomNavOffset
+      ) - y}px
+    `;
   }
 
   private dockPanel(): void {
@@ -50,10 +56,16 @@ export class DraggablePanel extends React.Component<DraggablePanelProps> {
       position = screenHeight - this.dragHandleHeight;
     } else {
       // This is the height for the bottom nav, set in /styles/navigator.scss
-      position = screenHeight - (this.dragHandleHeight + this.navBarHeight);
+      position = screenHeight - (this.dragHandleHeight + Constants.DRAGABBLE_PANEL.navBarHeight);
     }
     this.panelRef.current.style.top = `${position}px`;
-    this.panelRef.current.style.height = `${screenHeight - (this.props.noBottomNav ? 0 : 40) - (position + this.handleDistance)}px`;
+    this.panelRef.current.style.height = `
+      ${screenHeight - (
+        this.props.noBottomNav
+          ? Constants.DRAGABBLE_PANEL.offsetWithoutBottomNav
+          : Constants.DRAGABBLE_PANEL.bottomNavOffset
+      ) - (position + this.handleDistance)}px
+    `;
   }
 
   public render(): React.ReactNode {

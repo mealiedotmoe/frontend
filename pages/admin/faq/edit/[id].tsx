@@ -17,6 +17,7 @@ import Router from 'next/router';
 import { Navigator } from '../../../../components/navigator/navigator';
 import ReactMarkdown from 'react-markdown';
 import { DraggablePanel } from '../../../../components/panel-drag/draggable-panel';
+import Constants from "../../../../utils/constants.json";
 
 @observer
 class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -128,7 +129,10 @@ class EditFAQ extends React.Component<InferGetServerSidePropsType<typeof getServ
           <section className="tag-control">
             <div
               className="faq-tag"
-              style={{ background: this.color, color: Color(this.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
+              style={{
+                background: this.color,
+                color: Color(this.color).contrast(Color("#FFFFFF")) < Constants.FAQ_TAGS_MIN_CONTRAST ? "#202020" : "#FFFFFF"
+              }}
             >
               <input className="tag-input" value={this.tag} onChange={ev => this.tag = ev.target.value} />
             </div>

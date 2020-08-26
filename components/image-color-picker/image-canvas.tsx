@@ -3,6 +3,7 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { findCanvasMousePos } from '../../utils/find-canvas-mouse-pos';
 import { rgbToHex } from '../../utils/rgb-to-hex';
+import Constants from "../../utils/constants.json";
 
 export interface ImageCanvasProps {
   imageData: ImageCanvasData;
@@ -28,8 +29,8 @@ export class ImageCanvas extends React.Component<ImageCanvasProps> {
     this.canvasRef.current.addEventListener('mousemove', (event) => this.handleMouseMove(event));
     this.canvasRef.current.getContext('2d')?.drawImage(
       this.props.imageData.image,
-      0,
-      0,
+      Constants.PALETTE_CANVAS_DRAW_START_POS.x,
+      Constants.PALETTE_CANVAS_DRAW_START_POS.y,
       this.props.imageData.size.width,
       this.props.imageData.size.height
     );
@@ -51,9 +52,15 @@ export class ImageCanvas extends React.Component<ImageCanvasProps> {
     const context = this.canvasRef.current.getContext('2d');
     if (!context) return '#000000';
 
-    const pointData = context.getImageData(x, y, 1, 2).data;
+    const pointData = context.getImageData(
+      x,
+      y,
+      Constants.PALETTE_IMAGE_PICKER_POINTER_RECT.width,
+      Constants.PALETTE_IMAGE_PICKER_POINTER_RECT.height
+    ).data;
 
-    return '#' + ("000000" + rgbToHex(pointData[0], pointData[1], pointData[2])).slice(-6);
+    const [r, g, b] = pointData;
+    return '#' + ("000000" + rgbToHex(r, g, b)).slice(Constants.RGB_HEX_SLICE_INT);
   }
 
   private handleMouseMove(event: MouseEvent): void {

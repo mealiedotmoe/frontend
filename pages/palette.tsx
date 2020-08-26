@@ -21,6 +21,14 @@ import { redirectToLogin } from '../utils/login';
 import { paletteCreator } from '../utils/palette-creator';
 import { ROLES } from '../utils/roles';
 import { DraggablePanel } from '../components/panel-drag/draggable-panel';
+import Constants from '../utils/constants.json';
+import { ColorResult } from 'react-color';
+
+export enum PickerTab {
+  COLOR_PICKER,
+  IMAGE_PICKER,
+  SAVED_PALETTES
+}
 
 @observer
 class Palette extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -32,7 +40,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
   @observable private paletteName: string = uniqueNamesGenerator({ dictionaries: [colors, animals], length: 2, separator: " ", style: "capital" });
   @observable private saved = false;
   @observable private isMobile = false;
-  @observable private tabIndex = 0;
+  @observable private tabIndex: PickerTab = PickerTab.COLOR_PICKER;
 
   public constructor(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
     super(props);
@@ -126,37 +134,37 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
         <>
           <nav className="picker-tab-container">
             <button
-              className={`picker-tab ${this.tabIndex === 0 && "selected"}`}
-              onClick={() => this.tabIndex = 0}
+              className={`picker-tab ${this.tabIndex === PickerTab.COLOR_PICKER && "selected"}`}
+              onClick={() => this.tabIndex = PickerTab.COLOR_PICKER}
             >
               Color
             </button>
             <button
-              className={`picker-tab ${this.tabIndex === 1 && "selected"}`}
-              onClick={() => this.tabIndex = 1}
+              className={`picker-tab ${this.tabIndex === PickerTab.IMAGE_PICKER && "selected"}`}
+              onClick={() => this.tabIndex = PickerTab.IMAGE_PICKER}
             >
               Image
             </button>
             <button
-              className={`picker-tab ${this.tabIndex === 2 && "selected"}`}
-              onClick={() => this.tabIndex = 2}
+              className={`picker-tab ${this.tabIndex === PickerTab.SAVED_PALETTES && "selected"}`}
+              onClick={() => this.tabIndex = PickerTab.SAVED_PALETTES}
             >
               Saved
             </button>
           </nav>
           <section className="picker-tabs-container">
-            {this.tabIndex === 0 && (
+            {this.tabIndex === PickerTab.COLOR_PICKER && (
               <ColorPicker
                 color={this.roleColorMap[this.selectedRole]}
-                onChange={(color) => this.changeSelectedColor(color.hex)}
+                onChange={(color: ColorResult) => this.changeSelectedColor(color.hex)}
               />
             )}
-            {this.tabIndex === 1 && (
+            {this.tabIndex === PickerTab.IMAGE_PICKER && (
               <ImageColorPicker
                 onChange={color => this.changeSelectedColor(color)}
               />
             )}
-            {this.tabIndex === 2 && (
+            {this.tabIndex === PickerTab.SAVED_PALETTES && (
               <SavedPalettes
                 onChange={(palette: APIPalette) => this.initPaletteFromSaved(palette)}
                 onColorPick={(color: string) => this.changeSelectedColor(color)}
@@ -171,14 +179,14 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
       case 'image':
         return (
           <ImageColorPicker
-            onChange={color => this.changeSelectedColor(color)}
+            onChange={(color: string) => this.changeSelectedColor(color)}
           />
         );
       case 'palette':
         return (
           <ColorPicker
             color={this.roleColorMap[this.selectedRole]}
-            onChange={(color) => this.changeSelectedColor(color.hex)}
+            onChange={(color: ColorResult) => this.changeSelectedColor(color.hex)}
           />
         );
       case 'saved':
@@ -239,7 +247,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
                   role={role} className={role === this.selectedRole ? "selected" : ""}
                 />
                 <div className="check-container">
-                  {Color(this.roleColorMap[role]).contrast(Color("#36393F")) < 3.1 ? (
+                  {Color(this.roleColorMap[role]).contrast(Color("#36393F")) < Constants.PALETTE_COLOR_MIN_CONTRAST ? (
                     <div className="icon-container">
                       <MdClose className="status-icon warn" />
                       <span className="contrast-label">Dark</span>
@@ -250,7 +258,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
                       <span className="contrast-label">Dark</span>
                     </div>
                   )}
-                  {Color(this.roleColorMap[role]).contrast(Color("#FFFFFF")) < 3.1 ? (
+                  {Color(this.roleColorMap[role]).contrast(Color("#FFFFFF")) < Constants.PALETTE_COLOR_MIN_CONTRAST ? (
                     <div className="icon-container">
                       <MdClose className="status-icon warn" />
                       <span className="contrast-label">Light</span>

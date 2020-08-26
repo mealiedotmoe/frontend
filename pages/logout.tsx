@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import Constants from '../utils/constants.json';
 
 export default class Logout extends React.Component<Record<string, unknown>> {
   public componentDidMount(): void {
-    setTimeout(() => window.location.pathname = "/", 500);
+    setTimeout(() => window.location.pathname = "/", Constants.INTERNAL_REDIRECT_TIMEOUT * Constants.SECONDS_TO_MILLISECONDS_FACTOR);
   }
   
   public render(): React.ReactNode {

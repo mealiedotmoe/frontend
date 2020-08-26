@@ -13,6 +13,7 @@ import Color from 'color';
 import cookies from "next-cookies";
 import jwt from "jsonwebtoken";
 import { DraggablePanel } from '../../components/panel-drag/draggable-panel';
+import Constants from "../../utils/constants.json";
 
 class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public get renderFAQCards(): React.ReactNode {
@@ -56,7 +57,10 @@ class FAQContent extends React.Component<InferGetServerSidePropsType<typeof getS
           <section className="tags-container">
             <div
               className="faq-tag"
-              style={{ background: this.props.faqContent.color, color: Color(this.props.faqContent.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
+              style={{
+                background: this.props.faqContent.color,
+                color: Color(this.props.faqContent.color).contrast(Color("#FFFFFF")) < Constants.FAQ_TAGS_MIN_CONTRAST ? "#202020" : "#FFFFFF"
+              }}
             >
               <span>{this.props.faqContent.tag}</span>
             </div>

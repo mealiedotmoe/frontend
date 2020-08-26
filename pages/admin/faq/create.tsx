@@ -1,23 +1,25 @@
-import * as React from 'react';
+import Color from 'color';
+import jwt from 'jsonwebtoken';
+import { computed, observable } from 'mobx';
+import { observer } from 'mobx-react';
 import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import cookies from 'next-cookies';
-import jwt from 'jsonwebtoken';
+import Head from 'next/head';
+import Link from 'next/link';
+import Router from 'next/router';
+import * as React from 'react';
+import { ChromePicker } from 'react-color';
+import ReactMarkdown from 'react-markdown';
+
+import { Alert } from '../../../components/alert/alert';
+import { FAQCard } from '../../../components/faq/faq-card';
+import { Navigator } from '../../../components/navigator/navigator';
+import { PageTitle } from '../../../components/page-title/page-title';
+import { DraggablePanel } from '../../../components/panel-drag/draggable-panel';
+import { apiFetch } from '../../../utils/api-fetch';
 import { DecodedJWT, IFAQ } from '../../../utils/api-return-types';
 import { redirectToLogin } from '../../../utils/login';
-import { apiFetch } from '../../../utils/api-fetch';
-import { FAQCard } from '../../../components/faq/faq-card';
-import Link from 'next/link';
-import Head from 'next/head';
-import { PageTitle } from '../../../components/page-title/page-title';
-import Color from 'color';
-import { observable, computed } from 'mobx';
-import { ChromePicker } from 'react-color';
-import { observer } from 'mobx-react';
-import Router from "next/router";
-import { Alert } from '../../../components/alert/alert';
-import { Navigator } from '../../../components/navigator/navigator';
-import ReactMarkdown from 'react-markdown';
-import { DraggablePanel } from '../../../components/panel-drag/draggable-panel';
+import Constants from "../../../utils/constants.json";
 
 @observer
 class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
@@ -41,15 +43,15 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
     ev.preventDefault();
 
     this.error = undefined;
-    if (this.tag.trim().length === 0) {
+    if (this.tag.trim().length === Constants.EMPTY_LENGHT) {
       this.error = "Tag cannot be empty";
       return;
     }
-    if (this.title.trim().length === 0) {
+    if (this.title.trim().length === Constants.EMPTY_LENGHT) {
       this.error = "Title cannot be empty";
       return;
     }
-    if (this.content.trim().length === 0) {
+    if (this.content.trim().length === Constants.EMPTY_LENGHT) {
       this.error = "Content cannot be empty";
       return;
     }
@@ -133,7 +135,10 @@ class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSi
           <section className="tag-control">
             <div
               className="faq-tag"
-              style={{ background: this.color, color: Color(this.color).contrast(Color("#FFFFFF")) < 3 ? "#202020" : "#FFFFFF" }}
+              style={{
+                background: this.color,
+                color: Color(this.color).contrast(Color("#FFFFFF")) < Constants.FAQ_TAGS_MIN_CONTRAST ? "#202020" : "#FFFFFF"
+              }}
             >
               <input className="tag-input" value={this.tag} onChange={ev => this.tag = ev.target.value} />
             </div>

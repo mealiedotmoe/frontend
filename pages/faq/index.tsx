@@ -11,12 +11,13 @@ import Scrollbars from "react-custom-scrollbars";
 import Link from 'next/link';
 import cookies from 'next-cookies';
 import { DraggablePanel } from '../../components/panel-drag/draggable-panel';
+import Constants from "../../utils/constants.json";
 
 @observer
 class FAQ extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
   public get renderFAQCards(): React.ReactNode {
     const faqs: Array<IFAQ> = this.props.faqs;
-    if (faqs.length === 0) {
+    if (faqs.length === Constants.EMPTY_LENGHT) {
       return (
         <section className="loading-alert">
           Looks like we don&apos;t have any FAQs written yet ^_^&quot;

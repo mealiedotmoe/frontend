@@ -7,6 +7,7 @@ import { apiFetch } from '../../utils/api-fetch';
 import { Palette } from '../../utils/api-return-types';
 import { redirectToLogin } from '../../utils/login';
 import { PaletteCard } from './palette-card';
+import Constants from "../../utils/constants.json";
 
 export interface SavedPaletteProps {
   onChange: (palette: Palette) => unknown;
@@ -61,13 +62,13 @@ export class SavedPalettes extends React.Component<SavedPaletteProps> {
             Loading palettes
           </section>
         )}
-        {this.loaded && !this.notLoggedIn && this.palettes.length === 0 && (
+        {this.loaded && !this.notLoggedIn && this.palettes.length === Constants.EMPTY_LENGHT && (
           <section className="loading-hint">
             <img src="/images/undraw_empty.svg" className="illustration" />
             No palettes saved yet
           </section>
         )}
-        {this.loaded && this.palettes.length !== 0 && (
+        {this.loaded && this.palettes.length !== Constants.EMPTY_LENGHT && (
           <>
             <header className="title">
               Saved Palettes

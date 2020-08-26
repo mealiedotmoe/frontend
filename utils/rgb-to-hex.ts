@@ -1,6 +1,7 @@
+import Constants from './constants.json';
+
 export function componentToHex(c: number): string {
-  const hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
+  return c.toString(Constants.HEX_BASE);
 }
 
 export function rgbToHex(r: number, g: number, b: number): string {

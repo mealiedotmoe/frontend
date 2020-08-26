@@ -1,0 +1,56 @@
+{
+  "FAQ_TAGS_MIN_CONTRAST": 3,
+  "PALETTE_CANVAS_DRAW_START_POS": {
+    "x": 0,
+    "y": 0
+  },
+  "PALETTE_IMAGE_PICKER_POINTER_RECT": {
+    "width": 1,
+    "height": 2
+  },
+  "RGB_HEX_SLICE_INT": -6,
+  "NEW_IMAGE_OPEN_TIMEOUT": 10,
+  "DRAGABBLE_PANEL": {
+    "handleDistance": 8,
+    "yAxisInit": 0,
+    "handleHeight": 54,
+    "navBarHeight": 50,
+    "bottomNavOffset": 40,
+    "offsetWithoutBottomNav": 0,
+    "minimumDockScreenFactor": 0.2
+  },
+  "EMPTY_LENGHT": 0,
+  "LOGIN_REDIRECT_TIMEOUT": 5,
+  "SECONDS_TO_MILLISECONDS_FACTOR": 1000,
+  "GENERATED_PALETTE_CANVAS": {
+    "imageStartPos": {
+      "x": 0,
+      "y": 0
+    },
+    "titlePos": {
+      "x": 15,
+      "y": 36
+    },
+    "subtitlePos": {
+      "x": 15,
+      "y": 56
+    },
+    "indexIncrement": 1,
+    "roleHeight": 30,
+    "roleNamePos": {
+      "x": 15
+    },
+    "roleColorPos": {
+      "x": 201
+    },
+    "paletteAuthorPos": {
+      "x": 15,
+      "y": 350
+    }
+  },
+  "INTERNAL_REDIRECT_TIMEOUT": 1,
+  "AVERAGE_READER_WPM": 200,
+  "PALETTE_COLOR_MIN_CONTRAST": 3.0,
+  "HTTP_SUCCESS_STATUS_CODE": 200,
+  "HEX_BASE": 16
+}
