@@ -6,6 +6,29 @@
   background-size: cover;
   background-position-y: 40%;
 
+  .non-admin-notice {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .illustration {
+      width: 50%;
+      height: auto;
+      margin-bottom: 16px;
+    }
+    .not-allowed-hint {
+      color: rgba(255,255,255,.6);
+      font-size: 16px;
+      width: 70%;
+      display: block;
+      text-align: center;
+    }
+  }
+
   .content-container {
     width: 45vw;
     margin-left: calc(50vw - (45vw / 2) - 32px);
