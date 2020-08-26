@@ -219,7 +219,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
           <section className="roles-display">
             <header className="col-header input-header">
               <label className="input-label">Text to display</label>
-              <input className="text-field" value={this.displayText} onChange={ev => this.displayText = ev.target.value} />
+              <input className="text-field" value={this.displayText} onChange={ev => this.displayText = ev.target.value} maxLength={12} />
             </header>
             <div className="check-container header">
               <header className="col-header">
