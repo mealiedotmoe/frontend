@@ -3,8 +3,16 @@ import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsT
 import cookies from 'next-cookies';
 import { Navigator } from '../components/navigator/navigator';
 import Head from 'next/head';
+import { redirectToLogin } from '../utils/login';
 
 export default class ServerMap extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
+  public componentDidMount(): void {
+    if (!this.props.loggedIn) {
+      redirectToLogin();
+      return;
+    }
+  }
+
   public render(): React.ReactNode {
     return (
       <section className="server-map-container">
