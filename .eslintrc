@@ -16,7 +16,8 @@
     "no-magic-numbers": [
       "error",
       {
-        "ignoreArrayIndexes": true
+        "ignoreArrayIndexes": true,
+        "ignore": [ -1, 0, 1, 10 ]
       }
     ]
   },
