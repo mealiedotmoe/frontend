@@ -7,5 +7,4 @@ export const ROLES = [
   "Addicted",
   "Insomniac",
   "No Lifer",
-  "Birthday"
-]
+];

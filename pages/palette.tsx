@@ -1,57 +1,71 @@
-import Color from 'color';
-import { action, computed, observable } from 'mobx';
-import { observer } from 'mobx-react';
-import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import cookies from 'next-cookies';
-import Head from 'next/head';
-import * as React from 'react';
-import { MdCheck, MdClose } from 'react-icons/md';
-import { animals, colors, uniqueNamesGenerator } from 'unique-names-generator';
+import Color from "color";
+import { action, computed, observable } from "mobx";
+import { observer } from "mobx-react";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
+import cookies from "next-cookies";
+import Head from "next/head";
+import * as React from "react";
+import { MdCheck, MdClose } from "react-icons/md";
+import { animals, colors, uniqueNamesGenerator } from "unique-names-generator";
 
-import ColorPicker from '../components/color-picker/color-picker';
-import { ImageColorPicker } from '../components/image-color-picker/image-color-picker';
-import { ImagePanel } from '../components/image-panel/image-panel';
-import { Navigator } from '../components/navigator/navigator';
-import { PageTitle } from '../components/page-title/page-title';
-import { RoleDisplay } from '../components/role-display/role-display';
-import { SavedPalettes } from '../components/saved-palette/saved-palettes';
-import { apiFetch } from '../utils/api-fetch';
-import { Palette as APIPalette, User } from '../utils/api-return-types';
-import { redirectToLogin } from '../utils/login';
-import { paletteCreator } from '../utils/palette-creator';
-import { ROLES } from '../utils/roles';
-import { DraggablePanel } from '../components/panel-drag/draggable-panel';
-import Constants from '../utils/constants.json';
-import { ColorResult } from 'react-color';
+import ColorPicker from "../components/color-picker/color-picker";
+import { ImageColorPicker } from "../components/image-color-picker/image-color-picker";
+import { ImagePanel } from "../components/image-panel/image-panel";
+import { Navigator } from "../components/navigator/navigator";
+import { PageTitle } from "../components/page-title/page-title";
+import { RoleDisplay } from "../components/role-display/role-display";
+import { SavedPalettes } from "../components/saved-palette/saved-palettes";
+import { apiFetch } from "../utils/api-fetch";
+import { Palette as APIPalette, User } from "../utils/api-return-types";
+import { redirectToLogin } from "../utils/login";
+import { paletteCreator } from "../utils/palette-creator";
+import { ROLES } from "../utils/roles";
+import { DraggablePanel } from "../components/panel-drag/draggable-panel";
+import Constants from "../utils/constants.json";
+import { ColorResult } from "react-color";
 
 export enum PickerTab {
   COLOR_PICKER,
   IMAGE_PICKER,
-  SAVED_PALETTES
+  SAVED_PALETTES,
 }
 
 @observer
-class Palette extends React.Component<InferGetServerSidePropsType<typeof getServerSideProps>> {
+class Palette extends React.Component<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> {
   @observable private picker: "image" | "palette" | "saved" = "palette";
-  @observable private roleColorMap: { [key: string]: string; } = {};
+  @observable private roleColorMap: { [key: string]: string } = {};
   @observable private selectedRole = "Clover";
   @observable private displayText = "Sample";
   @observable private generatedPaletteImageSrc?: string;
-  @observable private paletteName: string = uniqueNamesGenerator({ dictionaries: [colors, animals], length: 2, separator: " ", style: "capital" });
+  @observable private paletteName: string = uniqueNamesGenerator({
+    dictionaries: [colors, animals],
+    length: 2,
+    separator: " ",
+    style: "capital",
+  });
   @observable private saved = false;
   @observable private isMobile = false;
   @observable private tabIndex: PickerTab = PickerTab.COLOR_PICKER;
 
-  public constructor(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  public constructor(
+    props: InferGetServerSidePropsType<typeof getServerSideProps>
+  ) {
     super(props);
-    ROLES.forEach(role => this.roleColorMap[role] = '#428AE9');
-  } 
-  
+    ROLES.forEach((role) => (this.roleColorMap[role] = "#428AE9"));
+  }
+
   public componentDidMount(): void {
-    const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+    const mobileRegex =
+      /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
     this.isMobile = mobileRegex.test(navigator.userAgent.toLowerCase());
   }
-  
+
   @action private changeSelectedColor(color: string): void {
     this.roleColorMap[this.selectedRole] = color;
   }
@@ -85,8 +99,8 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
       addicted: this.roleColorMap["Addicted"],
       insomniac: this.roleColorMap["Insomniac"],
       nolifer: this.roleColorMap["No Lifer"],
-      birthday: this.roleColorMap["Birthday"],
-      name: this.paletteName
+      birthday: "#000000",
+      name: this.paletteName,
     });
     this.saved = true;
   }
@@ -94,7 +108,12 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
   @action private cancelImagePanel(): void {
     this.generatedPaletteImageSrc = undefined;
     this.saved = false;
-    this.paletteName = uniqueNamesGenerator({ dictionaries: [colors, animals], length: 2, separator: " ", style: "capital" });
+    this.paletteName = uniqueNamesGenerator({
+      dictionaries: [colors, animals],
+      length: 2,
+      separator: " ",
+      style: "capital",
+    });
   }
 
   @action private initPaletteFromSaved(palette: APIPalette): void {
@@ -107,7 +126,6 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
       Addicted: palette["addicted"],
       Insomniac: palette["insomniac"],
       "No Lifer": palette["nolifer"],
-      Birthday: palette["birthday"],
     };
   }
 
@@ -119,8 +137,8 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
         paletteImageSrc={this.generatedPaletteImageSrc || ""}
         onClose={() => this.cancelImagePanel()}
         paletteName={this.paletteName}
-        onPaletteNameChange={ev => this.paletteName = ev.target.value}
-        onSave={ev => this.savePaletteToAPI(ev)}
+        onPaletteNameChange={(ev) => (this.paletteName = ev.target.value)}
+        onSave={(ev) => this.savePaletteToAPI(ev)}
         loggedIn={this.props.loggedIn}
         saved={this.saved}
       />
@@ -134,20 +152,26 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
         <>
           <nav className="picker-tab-container">
             <button
-              className={`picker-tab ${this.tabIndex === PickerTab.COLOR_PICKER && "selected"}`}
-              onClick={() => this.tabIndex = PickerTab.COLOR_PICKER}
+              className={`picker-tab ${
+                this.tabIndex === PickerTab.COLOR_PICKER && "selected"
+              }`}
+              onClick={() => (this.tabIndex = PickerTab.COLOR_PICKER)}
             >
               Color
             </button>
             <button
-              className={`picker-tab ${this.tabIndex === PickerTab.IMAGE_PICKER && "selected"}`}
-              onClick={() => this.tabIndex = PickerTab.IMAGE_PICKER}
+              className={`picker-tab ${
+                this.tabIndex === PickerTab.IMAGE_PICKER && "selected"
+              }`}
+              onClick={() => (this.tabIndex = PickerTab.IMAGE_PICKER)}
             >
               Image
             </button>
             <button
-              className={`picker-tab ${this.tabIndex === PickerTab.SAVED_PALETTES && "selected"}`}
-              onClick={() => this.tabIndex = PickerTab.SAVED_PALETTES}
+              className={`picker-tab ${
+                this.tabIndex === PickerTab.SAVED_PALETTES && "selected"
+              }`}
+              onClick={() => (this.tabIndex = PickerTab.SAVED_PALETTES)}
             >
               Saved
             </button>
@@ -156,17 +180,21 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
             {this.tabIndex === PickerTab.COLOR_PICKER && (
               <ColorPicker
                 color={this.roleColorMap[this.selectedRole]}
-                onChange={(color: ColorResult) => this.changeSelectedColor(color.hex)}
+                onChange={(color: ColorResult) =>
+                  this.changeSelectedColor(color.hex)
+                }
               />
             )}
             {this.tabIndex === PickerTab.IMAGE_PICKER && (
               <ImageColorPicker
-                onChange={color => this.changeSelectedColor(color)}
+                onChange={(color) => this.changeSelectedColor(color)}
               />
             )}
             {this.tabIndex === PickerTab.SAVED_PALETTES && (
               <SavedPalettes
-                onChange={(palette: APIPalette) => this.initPaletteFromSaved(palette)}
+                onChange={(palette: APIPalette) =>
+                  this.initPaletteFromSaved(palette)
+                }
                 onColorPick={(color: string) => this.changeSelectedColor(color)}
               />
             )}
@@ -176,29 +204,33 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
     }
 
     switch (this.picker) {
-      case 'image':
+      case "image":
         return (
           <ImageColorPicker
             onChange={(color: string) => this.changeSelectedColor(color)}
           />
         );
-      case 'palette':
+      case "palette":
         return (
           <ColorPicker
             color={this.roleColorMap[this.selectedRole]}
-            onChange={(color: ColorResult) => this.changeSelectedColor(color.hex)}
+            onChange={(color: ColorResult) =>
+              this.changeSelectedColor(color.hex)
+            }
           />
         );
-      case 'saved':
+      case "saved":
         return (
           <SavedPalettes
-            onChange={(palette: APIPalette) => this.initPaletteFromSaved(palette)}
+            onChange={(palette: APIPalette) =>
+              this.initPaletteFromSaved(palette)
+            }
             onColorPick={(color: string) => this.changeSelectedColor(color)}
           />
         );
     }
   }
-  
+
   public render(): React.ReactNode {
     return (
       <section className="picker-container">
@@ -209,15 +241,24 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
           <>
             {this.renderPickerComponent}
             <section className="actions">
-              <button className="button text" onClick={() => this.picker = this.picker === "image" ? "palette" : "image"}>
-                Use {this.picker === "image" ? "color picker" : "an image"} instead
+              <button
+                className="button text"
+                onClick={() =>
+                  (this.picker = this.picker === "image" ? "palette" : "image")
+                }
+              >
+                Use {this.picker === "image" ? "color picker" : "an image"}{" "}
+                instead
               </button>
-              <button className="button text" onClick={() => this.picker = this.picker === "saved" ? "palette" : "saved"}>
-                {this.picker === "saved" ? (
-                  "Back to color picker"
-                ) : (
-                  "View saved palettes"
-                )}
+              <button
+                className="button text"
+                onClick={() =>
+                  (this.picker = this.picker === "saved" ? "palette" : "saved")
+                }
+              >
+                {this.picker === "saved"
+                  ? "Back to color picker"
+                  : "View saved palettes"}
               </button>
             </section>
           </>
@@ -227,38 +268,42 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
           <section className="roles-display">
             <header className="col-header input-header">
               <label className="input-label">Text to display</label>
-              <input className="text-field" value={this.displayText} onChange={ev => this.displayText = ev.target.value} maxLength={12} />
+              <input
+                className="text-field"
+                value={this.displayText}
+                onChange={(ev) => (this.displayText = ev.target.value)}
+                maxLength={12}
+              />
             </header>
             <div className="check-container header">
-              <header className="col-header">
-                Dark
-              </header>
-              <header className="col-header">
-                Light
-              </header>
+              <header className="col-header">Dark</header>
+              <header className="col-header">Light</header>
             </div>
-            {ROLES.map(role => (
-              <>
+            {ROLES.map((role) => (
+              <React.Fragment key={role}>
                 <RoleDisplay
                   color={this.roleColorMap[role]}
                   displayText={this.displayText}
                   onClick={() => this.selectRole(role)}
                   key={role}
-                  role={role} className={role === this.selectedRole ? "selected" : ""}
+                  role={role}
+                  className={role === this.selectedRole ? "selected" : ""}
                 />
                 <div className="check-container">
-                  {Color(this.roleColorMap[role]).contrast(Color("#36393F")) < Constants.PALETTE_COLOR_MIN_CONTRAST ? (
+                  {Color(this.roleColorMap[role]).contrast(Color("#36393F")) <
+                  Constants.PALETTE_COLOR_MIN_CONTRAST ? (
                     <div className="icon-container">
                       <MdClose className="status-icon warn" />
                       <span className="contrast-label">Dark</span>
-                </div>
+                    </div>
                   ) : (
                     <div className="icon-container">
                       <MdCheck className="status-icon check" />
                       <span className="contrast-label">Dark</span>
                     </div>
                   )}
-                  {Color(this.roleColorMap[role]).contrast(Color("#FFFFFF")) < Constants.PALETTE_COLOR_MIN_CONTRAST ? (
+                  {Color(this.roleColorMap[role]).contrast(Color("#FFFFFF")) <
+                  Constants.PALETTE_COLOR_MIN_CONTRAST ? (
                     <div className="icon-container">
                       <MdClose className="status-icon warn" />
                       <span className="contrast-label">Light</span>
@@ -270,7 +315,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
                     </div>
                   )}
                 </div>
-              </>
+              </React.Fragment>
             ))}
           </section>
           <section className="actions">
@@ -282,7 +327,7 @@ class Palette extends React.Component<InferGetServerSidePropsType<typeof getServ
           <Navigator loggedIn={this.props.loggedIn} />
         </section>
       </section>
-    )
+    );
   }
 }
 
@@ -291,18 +336,18 @@ export default Palette;
 export const getServerSideProps: GetServerSideProps<{
   loggedIn: boolean;
 }> = async (context: GetServerSidePropsContext) => {
-  const token = cookies(context)['session-jwt'];
+  const token = cookies(context)["session-jwt"];
   if (!token) {
     return {
       props: {
         loggedIn: Boolean(token),
-      }
+      },
     };
   }
 
   return {
     props: {
-      loggedIn: Boolean(token)
+      loggedIn: Boolean(token),
     },
   };
-}
+};
